@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KSE BSc Psychology — Curriculum Sequence Map & Audit</title>
+<style>
+  :root{
+    --bg:#eef1f6; --panel:#ffffff; --panel2:#f1f5fb; --line:#d3dbe8; --ink:#1b2433;
+    --mut:#5d6b82; --acc:#2563eb; --warn:#d97706; --bad:#dc2626; --ok:#059669;
+    --math:#6366f1; --prog:#0d9488; --sys:#0891b2; --sec:#2563eb; --offense:#65a30d;
+    --ai:#9333ea; --grc:#d97706; --prof:#64748b; --lang:#94a3b8;
+    --practice:#ca8a04; --attest:#db2777; --wv:#92400e;
+    --edge:#7c8aa3; --devp:#be123c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--acc)}
+  .wrap{max-width:1500px;margin:0 auto;padding:26px 22px 80px}
+  header h1{font-size:26px;margin:0 0 4px;letter-spacing:.2px}
+  header .sub{color:var(--mut);font-size:14px;margin-bottom:8px}
+  .pill{display:inline-block;background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:3px 11px;margin:3px 6px 3px 0;font-size:12.5px;color:var(--mut)}
+  .pill b{color:var(--ink)}
+  section{margin-top:34px}
+  h2{font-size:19px;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+  h2 .n{display:inline-flex;width:25px;height:25px;border-radius:7px;background:var(--acc);
+    color:#fff;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .lead{color:var(--mut);max-width:980px;margin:2px 0 16px}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 14px}
+  button.t{background:var(--panel);border:1px solid var(--line);color:var(--ink);
+    border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px}
+  button.t:hover{border-color:var(--acc)}
+  button.t.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;margin:6px 0 4px;font-size:12.5px;color:var(--mut)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+  /* ---- Flow diagram ---- */
+  .flowscroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel);
+    box-shadow:0 1px 3px rgba(20,30,50,.05)}
+  #flow{position:relative;min-width:1460px}
+  .yearhead{display:grid;grid-template-columns:repeat(12,1fr);position:relative;z-index:3}
+  .yh{padding:9px 8px 5px;font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px;
+    border-left:1px solid var(--line);background:var(--panel2)}
+  .yh b{display:block;color:var(--ink);font-size:12.5px;letter-spacing:.2px;text-transform:none}
+  .yh .wk{color:#8492a8;font-size:10.5px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);position:relative;z-index:2}
+  .col{border-left:1px solid var(--line);padding:8px 6px 16px;min-height:60px}
+  .col:last-child{border-right:1px solid var(--line)}
+  .credlbl{font-size:10.5px;color:#6b7689;text-align:center;margin:2px 0 8px;
+    padding:2px;border-radius:5px;background:#eef2f7;border:1px solid var(--line)}
+  .credlbl.over{color:#fff;background:var(--warn);border-color:var(--warn);font-weight:700}
+  .credlbl.heavy{color:#7a4a06;background:#fde6c4;border-color:#f3cf9a;font-weight:600}
+  .card{position:relative;background:var(--panel);border:1px solid var(--line);
+    border-left:4px solid var(--mut);border-radius:8px;padding:6px 7px;margin:0 0 7px;
+    cursor:default;transition:.13s;z-index:2;box-shadow:0 1px 2px rgba(20,30,50,.05)}
+  .card:hover{border-color:var(--acc);transform:translateY(-1px);z-index:6;box-shadow:0 4px 12px rgba(20,30,50,.14)}
+  .card .code{font-size:11px;font-weight:700;letter-spacing:.3px}
+  .card .nm{font-size:10.5px;color:var(--mut);line-height:1.3;margin-top:1px}
+  .card .cr{position:absolute;top:5px;right:6px;font-size:10px;color:#8492a8}
+  .card .flag{position:absolute;top:-7px;left:-7px;width:17px;height:17px;border-radius:50%;
+    background:var(--bad);color:#fff;font-size:11px;font-weight:700;display:flex;
+    align-items:center;justify-content:center;z-index:7;cursor:help;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .card.warnf{border-left-color:var(--warn)}
+  .clegend{margin:0 0 14px}
+  .clegend .clbl{color:var(--ink);font-weight:600;margin-right:2px}
+  .band{display:grid;grid-template-columns:repeat(12,1fr);border-top:2px dashed var(--line);background:#f7f9fc}
+  .bandlbl{grid-column:1 / -1;padding:8px 10px 2px;font-size:11.5px;color:var(--mut);
+    text-transform:uppercase;letter-spacing:.5px}
+  .col.el{padding-top:4px}
+  .card.elec{background:#f3f6fb;border-style:dashed}
+  .hint{font-size:12px;color:#7a869c;margin-top:8px}
+
+  /* ---- Knowledge swimlanes ---- */
+  .lanescroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+  table.lanes{border-collapse:collapse;min-width:1380px;width:100%;font-size:11px}
+  table.lanes th,table.lanes td{border:1px solid var(--line);vertical-align:top}
+  table.lanes thead th{background:var(--panel2);color:var(--mut);padding:7px 6px;
+    font-weight:600;font-size:11px}
+  table.lanes thead th.yr{color:var(--ink)}
+  td.lane{padding:6px 7px;width:130px;font-weight:600;background:var(--panel2)}
+  td.cell{padding:5px 5px;min-width:96px}
+  td.cell.empty{background:#f5f7fa}
+  td.cell.gap{background:repeating-linear-gradient(45deg,#fde0e0,#fde0e0 6px,#fbeeee 6px,#fbeeee 12px)}
+  .chip{display:block;border-radius:5px;padding:2px 5px;margin:2px 0;font-size:10.5px;
+    border:1px solid transparent}
+  .chip.m{font-weight:600}
+  .chip.e{border-style:dashed}
+  .lanestat{font-size:11.5px;color:var(--mut);margin:8px 2px 0}
+
+  /* ---- Workload chart ---- */
+  .bars{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;align-items:end;
+    height:240px;border:1px solid var(--line);border-radius:12px;background:var(--panel);
+    padding:16px 12px 8px;position:relative;box-shadow:0 1px 3px rgba(20,30,50,.05)}
+  .barcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+  .bar{width:62%;border-radius:5px 5px 0 0;background:var(--acc);position:relative;transition:.2s}
+  .bar.over{background:var(--warn)}
+  .bar.light{background:var(--prof)}
+  .barv{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:2px}
+  .barx{font-size:10px;color:var(--mut);text-align:center;line-height:1.2}
+  .refline{position:absolute;left:12px;right:12px;border-top:2px dashed #dc262688}
+  .refline span{position:absolute;right:0;top:-15px;font-size:10px;color:#c0392b;background:var(--panel);padding:0 4px}
+
+  /* ---- Findings (columns by type) ---- */
+  .fgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+  @media(max-width:1320px){.fgrid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:920px){.fgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.fgrid{grid-template-columns:1fr}}
+  .fcol{background:transparent}
+  .fcol h3.cat{font-size:13px;margin:0 0 10px;padding:8px 10px;border-radius:9px;
+    color:#fff;letter-spacing:.3px;display:flex;align-items:center;justify-content:space-between}
+  .fcol.seq h3.cat{background:#2563eb}
+  .fcol.load h3.cat{background:#d97706}
+  .fcol.cov h3.cat{background:#0d9488}
+  .fcol.trk h3.cat{background:#9333ea}
+  .fcol.meth h3.cat{background:#4338ca}
+  .cat .ct{background:rgba(255,255,255,.25);border-radius:999px;padding:1px 8px;font-size:11px}
+  .find{border:1px solid var(--line);border-radius:11px;background:var(--panel);
+    padding:12px 13px;margin:0 0 11px;border-top:3px solid var(--mut);
+    box-shadow:0 1px 2px rgba(20,30,50,.05)}
+  .find.high{border-top-color:var(--bad)}
+  .find.med{border-top-color:var(--warn)}
+  .find.low{border-top-color:var(--acc)}
+  .find .id{font-size:11px;font-weight:700;color:var(--mut);letter-spacing:.5px}
+  .find h4{margin:3px 0 6px;font-size:13.5px;line-height:1.35}
+  .sev{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
+    padding:2px 7px;border-radius:999px;float:right;margin-left:6px}
+  .sev.high{background:#fbe3e3;color:#b42121}
+  .sev.med{background:#fcedd6;color:#9a6206}
+  .sev.low{background:#e0ebfd;color:#1d4ed8}
+  .find p{margin:5px 0 0;color:#3a465b;font-size:12.5px}
+  .find .fix{margin-top:8px;color:var(--mut);font-size:12px;border-top:1px dashed var(--line);padding-top:7px}
+  .find .fix b{color:var(--ok)}
+  .finfo{display:inline-flex;width:14px;height:14px;border-radius:50%;border:1px solid var(--line);
+    background:var(--panel2);color:var(--mut);font-size:9.5px;font-weight:700;font-style:italic;
+    align-items:center;justify-content:center;cursor:help;vertical-align:middle;margin-left:3px}
+  .finfo:hover{border-color:var(--acc);color:var(--acc)}
+  code{background:#eef2f8;border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:11.5px;color:#1d4ed8}
+
+  /* ---- РН coverage ---- */
+  table.rn{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:6px;background:var(--panel);
+    border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(20,30,50,.05)}
+  table.rn th,table.rn td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+  table.rn th{background:var(--panel2);color:var(--mut);font-weight:600}
+  .tag{display:inline-block;border-radius:5px;padding:1px 6px;font-size:11px;font-weight:600}
+  .tag.man{background:#d6f3e6;color:#067a52}
+  .tag.thin{background:#fcedd6;color:#9a6206}
+  .tag.elec{background:#fbe3e3;color:#b42121}
+  .tag.gap{background:#fbe3e3;color:#b42121;border:1px dashed #e29b9b}
+  .foot{margin-top:40px;color:#7a869c;font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+
+  #tip{position:fixed;z-index:50;max-width:340px;background:#1b2433;color:#dfe5ee;font-size:12px;
+    line-height:1.45;padding:10px 13px;border-radius:9px;box-shadow:0 6px 22px rgba(0,0,0,.32);
+    pointer-events:none;opacity:0;display:none}
+  #tip.show{opacity:1;display:block}
+  #tip .tip-h{font-weight:700;font-size:12.5px;margin-bottom:7px;color:#fff}
+  #tip .tip-row{margin:6px 0;font-size:11.5px;line-height:1.45}
+  #tip .tip-chip{display:inline-block;border-radius:4px;padding:1px 6px;font-size:9px;font-weight:700;
+    color:#fff;margin-right:6px;text-transform:uppercase;letter-spacing:.4px;vertical-align:middle}
+  #tip .tip-id{color:#9aa6bd;font-size:9.5px;margin-left:5px}
+  #tip b{color:#ffc9c9}
+  @media(max-width:760px){.bars{height:210px}.wrap{padding:18px 12px 60px}}
+
+  /* ---- v7 interactivity ---- */
+  .secnav{max-width:1500px;margin:0 auto;padding:0 22px;display:flex;gap:6px;flex-wrap:wrap}
+  .secnav a{font-size:12px;color:var(--mut);text-decoration:none;background:var(--panel);
+    border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+  .secnav a:hover{color:var(--acc);border-color:var(--acc)}
+  .fbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 4px;font-size:12.5px}
+  .fbar .flbl{color:var(--mut);font-weight:600;margin-right:2px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+  button.chipb{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:3px 10px;font-size:12px;color:var(--ink);cursor:pointer;transition:.12s}
+  button.chipb .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  button.chipb.off{opacity:.35;filter:saturate(.3)}
+  button.chipb:hover{border-color:var(--acc)}
+  .prog{margin-left:auto;display:flex;gap:8px;align-items:center;color:var(--mut);font-size:12px}
+  .prog b{color:var(--ink)}
+  .pbar{width:110px;height:6px;border-radius:4px;background:#e2e8f0;overflow:hidden}
+  .pbar i{display:block;height:100%;background:var(--ok);transition:width .25s}
+  .card.dim{opacity:.22;filter:saturate(.35)}
+  .flag.done{background:var(--ok)}
+  #pop{position:fixed;z-index:60;width:min(470px,92vw);background:#fff;border:1px solid var(--line);
+    border-radius:12px;box-shadow:0 14px 44px rgba(15,25,45,.24);padding:12px 14px;display:none}
+  #pop.show{display:block}
+  #pop h5{margin:0 24px 6px 0;font-size:13px}
+  #pop .x{position:absolute;top:7px;right:9px;border:0;background:transparent;font-size:16px;cursor:pointer;color:var(--mut)}
+  #pop .phint{font-size:11px;color:#8a94a8;margin-bottom:4px}
+  .pr{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-top:1px solid #eef1f6;font-size:12.5px;line-height:1.45}
+  .pr input{margin-top:2px;accent-color:var(--ok);width:15px;height:15px;flex:none;cursor:pointer}
+  .pr .ptext b.pid{color:#8a94a8;font-weight:600;font-size:11px;margin-left:5px}
+  .pr.ok .ptext{color:#94a0b4;text-decoration:line-through;text-decoration-color:#c3ccd9}
+  .find{position:relative;padding-top:26px !important}
+  .find label.rv{position:absolute;top:8px;right:10px;display:flex;gap:5px;align-items:center;
+    font-size:11px;color:var(--mut);cursor:pointer;user-select:none}
+  .find label.rv input{accent-color:var(--ok);width:14px;height:14px;cursor:pointer}
+  .find.done{opacity:.55}
+  .find.done h4{text-decoration:line-through;text-decoration-color:#c3ccd9}
+  /* ---- PLO heatmap (ordinal ramp validated: light 2.19:1 on surface) ---- */
+  .plom td.lane{width:238px;min-width:238px;position:sticky;left:0;z-index:2;box-shadow:2px 0 0 var(--line)}
+  .plom td.cell{min-width:88px}
+  .plname{font-weight:400;color:var(--mut);font-size:11px;line-height:1.35;margin-top:2px}
+  .plnote{font-weight:400;color:#8a94a8;font-size:10.5px;line-height:1.4;margin-top:4px}
+  .pvk{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.4px;padding:1px 5px;border-radius:4px;margin-left:5px;vertical-align:1px}
+  .pvk.std{background:#e2e8f0;color:#475569}
+  .pvk.kse{background:#ede9fe;color:#6d28d9}
+  .pc{display:inline-block;border-radius:5px;padding:2px 6px;margin:2px 3px 0 0;font-size:10.5px;font-weight:600;white-space:nowrap;cursor:default}
+  .pc.I{background:#7fb2f5;color:#0f2036}
+  .pc.R{background:#2f6fdb;color:#fff}
+  .pc.M{background:#173d8f;color:#fff}
+  .pc small{font-weight:700;opacity:.75;margin-left:3px}
+  .plom tr.hid{display:none}
+  .plom .pc.dimI{opacity:.18}
+
+  /* ---- v8 actionable summary ---- */
+  .acts{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);
+    padding:12px 16px 8px;box-shadow:0 1px 3px rgba(20,30,50,.05)}
+  .acts h3{font-size:14.5px;margin:0 0 2px}
+  .acts .sub{font-size:12px;color:var(--mut);margin:0 0 8px}
+  .act{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid #eef1f6;font-size:12.5px;line-height:1.5}
+  .act input{margin-top:3px;accent-color:var(--ok);width:15px;height:15px;flex:none;cursor:pointer}
+  .act .sevdot{width:9px;height:9px;border-radius:50%;flex:none;margin-top:6px}
+  .act .atext{flex:1}
+  .act .atext .k{display:inline-block;background:#eef2f7;border:1px solid var(--line);border-radius:4px;
+    padding:0 5px;font-size:10.5px;font-weight:700;color:#475569;margin:0 1px;white-space:nowrap}
+  .act .cost{flex:none;font-size:10.5px;font-weight:700;letter-spacing:.3px;border-radius:5px;
+    padding:2px 7px;margin-top:2px;white-space:nowrap}
+  .act .cost.course{background:#e0e9fb;color:#1d4ed8}
+  .act .cost.lo{background:#d6f3e6;color:#067a52}
+  .act .cost.zero{background:#f1f5f9;color:#475569}
+  .act .cost.dec{background:#fcedd6;color:#9a6206}
+  .act.ok .atext{color:#94a0b4;text-decoration:line-through;text-decoration-color:#c3ccd9}
+  .acts .foot{font-size:11px;color:#8a94a8;padding:8px 0 2px;border-top:1px solid #eef1f6}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="wrap">
+
+<header>
+  <h1>BSc Psychology — Curriculum Sequence Map &amp; Audit</h1>
+  <div class="sub">Kyiv School of Economics · Social Sciences Department · Educational programme 2025/26 (PSY25) · specialty C4 Psychology</div>
+  <div>
+    <span class="pill"><b>240</b> ECTS total</span>
+    <span class="pill"><b>4</b> years · <b>12</b> terms</span>
+    <span class="pill"><b>46</b> mandatory / internship / attestation components</span>
+    <span class="pill"><b>25</b> elective courses · <b>60 ECTS = 25.0%</b> (≥25% — zero margin)</span>
+    <span class="pill"><b>25</b> outcomes: 19 standard PLO + 6 own PSLO</span>
+    <span class="pill"><b>3</b> minors: Clinical · Research · Social&amp;Org (≥14 ECTS + project each)</span>
+  </div>
+</header>
+<nav class="secnav">
+  <a href="#s1">1 · Sequence & review checklist</a><a href="#s2">2 · Workload</a>
+  <a href="#s3">3 · Knowledge threads</a><a href="#s4">4 · Findings</a><a href="#s5">5 · PLO & competency coverage</a>
+</nav>
+
+<!-- =================== DIAGRAM 1 =================== -->
+<section id="s1">
+  <h2><span class="n">1</span> Course sequence by term</h2>
+  <p class="lead">The guaranteed mandatory path (plus internships &amp; attestation) across the 12 terms, each course coloured by
+  knowledge track (legend). A <b>numbered badge</b> marks a course that carries review concerns — its colour is the severity
+  (<span style="color:var(--bad)">&#9679;</span> high · <span style="color:var(--warn)">&#9679;</span> medium ·
+  <span style="color:var(--acc)">&#9679;</span> low) and the number is how many. <b>Hover the badge</b> to read them,
+  categorised (sequencing, workload, data, duplication, level, coverage) — most are detailed in section&nbsp;4.
+  Electives sit in the dashed band below their term.</p>
+
+  <div class="fbar"><span class="flbl">Tracks</span><span id="fTracks" style="display:contents"></span>
+    <button class="t" id="bE" onclick="toggleElec()" style="margin-left:6px">Electives: shown</button></div>
+  <div class="fbar"><span class="flbl">Concerns</span><span id="fCats" style="display:contents"></span>
+    <span class="flbl" style="margin-left:8px">Severity</span><span id="fSevs" style="display:contents"></span>
+    <button class="chipb off" id="bFlag">⚑ only flagged courses</button>
+    <button class="chipb off" id="bHideRev">✓ hide reviewed</button>
+    <span class="prog"><span class="pbar"><i id="pfill" style="width:0%"></i></span>
+      <span><b id="pdone">0</b>/<span id="ptot">0</span> reviewed</span>
+      <button class="chipb" id="bReset" title="clear all review ticks">reset</button></span>
+  </div>
+
+  <div class="flowscroll">
+    <div id="flow">
+      <div class="yearhead" id="yearhead"></div>
+      <div class="grid" id="grid"></div>
+      <div class="band" id="elecband"></div>
+    </div>
+  </div>
+  <div class="hint"><b>Hover a badge</b> for a quick look; <b>click it</b> to open the review checklist and tick issues off (ticks are saved in this browser — the badge turns <span style="color:var(--ok);font-weight:700">green ✓</span> when a course is fully reviewed). Use the filters above to slice by track, concern type or severity. Numbers under each term = mandatory ECTS
+  that term (electives add up to ~20 more from Year II); scroll horizontally for Years III–IV.</div>
+</section>
+
+<!-- =================== WORKLOAD =================== -->
+<section id="s2">
+  <h2><span class="n">2</span> Workload balance per term</h2>
+  <p class="lead">Mandatory ECTS scheduled in each term. The dashed line marks <b>20 ECTS</b> — the nominal full-time load for one term in this 3-terms-per-year structure (60 ÷ 3). From Year II students add elective ECTS on top of the bars shown (60 elective ECTS across the degree, ≥40 from programme electives), which is what fills the light Years III–IV (see findings W-1…W-3).</p>
+  <div class="bars" id="bars"></div>
+  <div class="lanestat">Year totals (mandatory + internships + attestation only): <b>Y1 = 56</b> · Y2 = 49 · Y3 = 43 · Y4 = 32 (+electives). No term exceeds 24 ECTS, but the weight sits front-left: y1t1 alone holds 6 courses and 5 exams, while Y4´s mandatory core is 7/11/14 — almost entirely elective + thesis by design.</div>
+</section>
+
+<!-- =================== DIAGRAM 2 =================== -->
+<section id="s3">
+  <h2><span class="n">3</span> Knowledge threads — who teaches what, and when</h2>
+  <p class="lead">Each row is a knowledge domain; each column a term. <b>Solid chips</b> = mandatory courses,
+  <span style="border-bottom:1px dashed #888">dashed chips</span> = electives that deliver that knowledge. Red hatched cells mark a
+  <b>gap</b> — the thread goes dormant for two or more terms, or restarts late. This is the "knowledge sequence":
+  read each row left‑to‑right to see how a competence is built up.</p>
+  <div class="lanescroll">
+    <table class="lanes" id="lanes"></table>
+  </div>
+  <div class="lanestat" id="lanenotes"></div>
+</section>
+
+<!-- =================== FINDINGS =================== -->
+<section id="s4">
+  <h2><span class="n">4</span> Findings — logical errors &amp; imbalances</h2>
+  <div class="fgrid" id="findings"></div>
+</section>
+
+<!-- =================== РН COVERAGE =================== -->
+<section id="s5">
+  <h2><span class="n">5</span> Outcome coverage (PLO) — is every outcome guaranteed?</h2>
+  <p class="lead">Each row is an outcome, each column a term — read left-to-right like the threads above. Chips are the mandatory courses contributing at level <span class="pc I">I<small>ntroduce</small></span> <span class="pc R">R<small>einforce</small></span> <span class="pc M">M<small>aster</small></span>; <b>guaranteed</b> needs ≥1&nbsp;M or ≥2&nbsp;R. <span style="color:#8a94a8">Hover any chip, tag or column header for the details.</span></p>
+  <div class="fbar"><span class="flbl">Verdict</span><span id="pfVerd" style="display:contents"></span>
+    <span class="flbl" style="margin-left:8px">Layer</span><span id="pfLayer" style="display:contents"></span>
+    <button class="chipb" id="bHideI" title="declutter: show only R/M carriers">hide I-touches</button>
+  </div>
+  <div class="lanescroll"><table class="lanes plom" id="plom"></table></div>
+
+  <h2 style="margin-top:26px;font-size:17px"><span class="n" style="background:#475569">✓</span> Competencies of Graduates (ЗК/СК) — check table</h2>
+  <p class="lead">Same grammar as above: 11 special (SC) + 13 general (GC) competencies of the profile´s cascade, all from
+  the C4 standard´s untouchable minimum. <span style="color:#8a94a8">SC chips carry the PLO they flow through; GC chips come from
+  direct LO evidence — hover anything for details.</span></p>
+  <div class="fbar"><span class="flbl">Verdict</span><span id="cfVerd" style="display:contents"></span>
+    <span class="flbl" style="margin-left:8px">Kind</span><span id="cfKind" style="display:contents"></span>
+    <button class="chipb" id="cHideI" title="declutter: show only R/M carriers">hide I-touches</button>
+  </div>
+  <div class="lanescroll"><table class="lanes plom" id="comp"></table></div>
+
+  <div class="acts" id="acts">
+  <h3>What can actually be addressed — 8 moves, checkable like everything else</h3>
+  <div class="sub">PLO: <b>22/25 guaranteed</b> · Competencies: <b>23/24 formed</b>. What fails is the programme´s own layer — and nothing here costs a new course.</div>
+<div class="act" data-an="1"><input type="checkbox" data-ak="A|1"><span class="sevdot" style="background:var(--bad)"></span><span class="atext">Rewrite <b>PSY370´s syllabus to its НП size (7 ECTS) and add 2–3 crisis-intervention outcomes</b> (crisis assessment, stabilisation protocol, referral). <span style="white-space:nowrap">→ closes <span class="k">PSLO21</span><span class="k">S-1</span></span><div style="color:#8a94a8;font-size:11.5px;margin-top:1px">The flagship 7-ECTS course carries «Crisis Intervention» in its name and zero crisis outcomes in its outdated 5-ECTS syllabus.</div></span><span class="cost lo">LO edits</span></div>
+<div class="act" data-an="2"><input type="checkbox" data-ak="A|2"><span class="sevdot" style="background:var(--bad)"></span><span class="atext">Fix the <b>НП/ОП data rows</b>: MIL100´s impossible hours (200 &gt; 90), the thesis 13-vs-14 ECTS conflict (ОП АТ.1 → 13), move the Qualification Exam into the Атестація block. <span style="white-space:nowrap">→ closes <span class="k">S-6</span></span></span><span class="cost zero">paper fix</span></div>
+<div class="act" data-an="3"><input type="checkbox" data-ak="A|3"><span class="sevdot" style="background:var(--warn)"></span><span class="atext">Give <b>PSLO20 a mastery point in PSY380</b>: one LO «design &amp; deliver a career-guidance programme» and expand its 3-outcome list. <span style="white-space:nowrap">→ closes <span class="k">PSLO20</span></span><div style="color:#8a94a8;font-size:11.5px;margin-top:1px">The programme´s own career-guidance promise rests on a single R from a 3-outcome course.</div></span><span class="cost lo">LO edits</span></div>
+<div class="act" data-an="4"><input type="checkbox" data-ak="A|4"><span class="sevdot" style="background:var(--warn)"></span><span class="atext">De-collide y3t2: move <b>PSY500 Gender &amp; Sexuality to y3t3 or y4t1</b> — its own syllabus requires Clinical Psychology, currently the same term; the ОП scheme agrees on the order. <span style="white-space:nowrap">→ closes <span class="k">S-3</span></span></span><span class="cost zero">0 new ECTS</span></div>
+<div class="act" data-an="5"><input type="checkbox" data-ak="A|5"><span class="sevdot" style="background:var(--warn)"></span><span class="atext">Rewrite the <b>research-thread outcome verbs</b> (PSY530, PSY660 — a topic list, PSY630, PSY310) and the other cap-set courses. <span style="white-space:nowrap">→ unlocks <span class="k">C-3</span><span class="k">M-2</span></span><div style="color:#8a94a8;font-size:11.5px;margin-top:1px">17 courses cannot hold M-cells because their outcomes are unmeasurable — 12 breadth-only PLO rows would likely confirm mastery after the rewrite.</div></span><span class="cost lo">LO edits</span></div>
+<div class="act" data-an="6"><input type="checkbox" data-ak="A|6"><span class="sevdot" style="background:var(--warn)"></span><span class="atext">Reconcile the <b>five ECTS collisions</b> (PSY370 → move 1, PSY250, PSY342, PSY352, PSY680 header) and the two contact=total header errors (SCI220, UKR111). <span style="white-space:nowrap">→ closes <span class="k">S-1</span><span class="k">S-2·part</span></span></span><span class="cost zero">paper fix</span></div>
+<div class="act" data-an="7"><input type="checkbox" data-ak="A|7"><span class="sevdot" style="background:var(--acc)"></span><span class="atext">Align <b>elective windows with their prerequisites</b>: Minor-3 opens y2t1 before Social/Cognitive Psychology exist. Either shift windows to «II t2 – IV» or drop the prerequisite claims. <span style="white-space:nowrap">→ closes <span class="k">S-4</span></span></span><span class="cost zero">paper fix</span></div>
+<div class="act" data-an="8"><input type="checkbox" data-ak="A|8"><span class="sevdot" style="background:var(--acc)"></span><span class="atext">Correct the <b>scheme´s Internship-3 year label</b> (Year 3 → Year 4), document the non-credit mechanism for <b>PLO19/GC13</b>, and split the template´s «Dependent courses» field into Prerequisites / Prepares-for. <span style="white-space:nowrap">→ closes <span class="k">S-7</span><span class="k">C-2</span><span class="k">T-3</span></span></span><span class="cost zero">paper fix</span></div>
+  <div class="foot">Method in one line: SC verdicts flow through the PLO matrix above (PLO→SC mapping, N=3), GC verdicts come from a direct LO-evidence pass; Rule A/B adjustments are logged in <i>plo_matrix.json</i>. The ОП declares no ОК×competency matrix — this one is constructed from syllabus evidence. Full matrices &amp; per-row paths: <i>psy-outcome-matrix.md</i>.</div>
+</div>
+</section>
+
+<div class="foot">Built from <i>НП PS 2025-26-1-7.docx</i> (study plan), <i>EP_Psychology 2025-26-2.docx</i> (educational programme, the 2025 «General Information» template with accreditation-coded components) and 63 course syllabi (of 46 mandatory + 27 elective components; 5 supplied files match no component; only KSE101 lacks a syllabus). Outcome texts were extracted from the syllabi and quality-scored with a fixed rubric (N=3 majority vote); the course×PLO / competency matrices (<i>plo_matrix.json</i>, <i>competency_matrix.json</i>) use the same protocol plus documented Rule-A/B adjustments. The ОП´s section-VII scheme (<i>logical_scheme.png</i> → <i>logical_scheme.json</i>) feeds S-3/S-7. Companion reports: <i>psy-outcome-matrix.md</i>, <i>psy-lo-quality.md</i>, <i>psy-lo-coherence.md</i>, <i>psy-syllabus-comments.md</i>.</div>
+
+</div>
+
+<script>
+/* ----------------- DATA ----------------- */
+const TR = {
+  found:['Psychology foundations','var(--math)'], res:['Research methods & Statistics','var(--offense)'],
+  assess:['Assessment & Psychometrics','var(--sys)'], dev:['Developmental & Educational','var(--devp)'],
+  soc:['Social & Political','var(--grc)'], clin:['Clinical & Neuro','var(--ai)'],
+  couns:['Counseling & Group practice','var(--prog)'], org:['Organizational & Applied','var(--sec)'],
+  hum:['Worldview / Humanities','var(--wv)'],
+  lang:['Language','var(--lang)'], prof:['Professional / Soft skills','var(--prof)'],
+  practice:['Internship & Capstones','var(--practice)'], attest:['Attestation','var(--attest)']
+};
+const TERMS = [
+ ['Y1','Autumn',16],['Y1','Spring',15],['Y1','Summer',11],
+ ['Y2','Autumn',16],['Y2','Spring',15],['Y2','Summer',12],
+ ['Y3','Autumn',16],['Y3','Spring',15],['Y3','Summer',12],
+ ['Y4','Autumn',16],['Y4','Spring',15],['Y4','Summer',8]
+];
+const idx=(y,t)=>(y-1)*3+(t-1);
+
+// mandatory / practice / attestation
+// [code,name,year,term,cr,lec,prac,track,prereq[],flag]
+const M = [
+ ["KSE101", "How to Study at KSE", 1, 1, 1, 16, 0, "prof", [], null],
+ ["ENG131", "English for Study & Work I", 1, 1, 5, 0, 74, "lang", [], null],
+ ["PSY230", "Intro to Psychology & Prof. Ethics", 1, 1, 3, 20, 30, "found", [], null],
+ ["PSY430", "Neural Bases of Behavior", 1, 1, 4, 32, 28, "clin", [], null],
+ ["SCI340", "Philosophical Studies", 1, 1, 4, 40, 20, "hum", [], null],
+ ["PSY530", "Methods of Psychological Research", 1, 1, 5, 30, 30, "res", [], null],
+ ["SCI220", "Anthropology", 1, 2, 4, 26, 34, "hum", [], null],
+ ["PSY570", "General Psychology", 1, 2, 4, 30, 30, "found", [], null],
+ ["PSY330", "History of Psychology", 1, 2, 6, 40, 40, "found", [], null],
+ ["ENG132", "English for Study & Work II", 1, 2, 5, 0, 74, "lang", [], null],
+ ["ENG133", "Academic Writing for Psychologists", 1, 3, 3, 0, 50, "lang", [], null],
+ ["PSY110", "Personality Psychology", 1, 3, 6, 34, 30, "found", [], null],
+ ["MATH1109", "Intro to Mathematics for Psych.", 1, 3, 3, 16, 28, "res", [], null],
+ ["PS300", "Basic First Aid", 1, 3, 1, 15, 5, "prof", [], null],
+ ["UKR111", "Professional Ukrainian Comm.", 1, 3, 2, 8, 24, "lang", [], null],
+ ["PSY550", "Experimental Psychology", 2, 1, 4, 30, 30, "res", [], null],
+ ["STAT254", "Math Statistics & Data Analysis", 2, 1, 6, 50, 40, "res", [], null],
+ ["SCI390", "Sociology", 2, 1, 4, 30, 30, "hum", [], null],
+ ["PSY510", "Personality & Individual Differences", 2, 1, 2, 10, 10, "found", [], null],
+ ["PSY340", "Developmental Psychology", 2, 1, 5, 40, 40, "dev", [], null],
+ ["PSY670", "Social Psychology", 2, 2, 6, 50, 40, "soc", [], null],
+ ["PSY440", "Psychological Assessment", 2, 2, 4, 30, 30, "assess", [], null],
+ ["PSY310", "Cognitive Psychology", 2, 2, 3, 20, 20, "found", [], null],
+ ["SCI400", "Propaganda & Counterprop.", 2, 2, 3, 16, 16, "soc", [], null],
+ ["PSY540", "Test Construction", 2, 3, 3, 30, 20, "assess", [], null],
+ ["PSY380", "Career Guidance & Selection", 2, 3, 3, 30, 20, "org", [], null],
+ ["CP1.PS", "Capstone Project 1", 2, 3, 3, 0, 0, "practice", [], null],
+ ["PSY490", "Educational Psychology", 3, 1, 3, 30, 20, "dev", [], null],
+ ["PSY200", "Neuropsychology", 3, 1, 4, 30, 30, "clin", [], null],
+ ["PSY250", "Psychopathology", 3, 1, 5, 30, 30, "clin", [], null],
+ ["PSY560", "Group Work Methods", 3, 1, 3, 20, 20, "couns", [], null],
+ ["PSY280", "Clinical Psychology", 3, 2, 5, 30, 30, "clin", [], null],
+ ["PSY500", "Psychology of Gender & Sexuality", 3, 2, 3, 30, 20, "clin", [], null],
+ ["PSY370", "Counseling & Crisis Intervention", 3, 2, 7, 40, 60, "couns", [], null],
+ ["PSY590", "Psychopharmacology", 3, 3, 3, 30, 20, "clin", [], null],
+ ["PSY270", "Intro to Psychotherapy", 3, 3, 4, 30, 30, "clin", [], null],
+ ["CP2.PS", "Capstone Project 2", 3, 3, 3, 0, 0, "practice", [], null],
+ ["PSY480", "Cultural & Religious Diversity", 4, 1, 3, 22, 24, "hum", [], null],
+ ["PSY301", "Political Psychology", 4, 1, 4, 20, 20, "soc", [], null],
+ ["ECON302", "Consumer Behavior", 4, 2, 4, 20, 20, "org", [], null],
+ ["PSY360", "Organizational Psychology", 4, 2, 4, 30, 30, "org", [], null],
+ ["ATT1.PSY", "Qualification Exam", 4, 3, 1, 0, 0, "attest", [], null],
+ ["IS2.PS", "Internship I", 2, 3, 3, 4, 0, "practice", [], null],
+ ["IS3.PS", "Internship II", 3, 3, 3, 4, 0, "practice", [], null],
+ ["IS4.PS", "Internship III", 4, 2, 3, 4, 0, "practice", [], null],
+ ["CP.PSY", "Qualification Thesis", 4, 3, 13, 0, 0, "attest", [], null]
+];
+
+// electives: [code,name,minor,block,year,term,cr,track]
+const EL = [
+ ["PSY342", "Psychology of Eating Disorders", "C", "—", 2, 1, 3, "clin"],
+ ["PSY343", "Intro to Art Therapy", "C", "—", 2, 1, 4, "clin"],
+ ["PSY345", "Therapeutic Horticulture", "C", "—", 2, 1, 2, "clin"],
+ ["PSY344", "Fundamentals of Chronobiology", "C", "—", 2, 2, 2, "clin"],
+ ["PSY347", "Mindfulness & Process-Based Therapy", "C", "—", 2, 2, 2, "clin"],
+ ["PSY350", "Child Mental Health", "C", "—", 2, 2, 3, "clin"],
+ ["PSY460", "Support & Inclusion of Disability", "C", "—", 2, 2, 2, "clin"],
+ ["PSY240", "Mental Health Lab", "C", "—", 2, 3, 3, "clin"],
+ ["PSY348", "Support for Veterans & Families", "C", "—", 2, 3, 2, "clin"],
+ ["AI370", "AI in Research", "R", "—", 2, 1, 3, "res"],
+ ["PSY520", "Ethics in Human Research", "R", "—", 2, 1, 3, "res"],
+ ["PSY290", "APA Standards for Publications", "R", "—", 2, 3, 3, "res"],
+ ["PSY630", "Qualitative Research Methods", "R", "—", 2, 3, 3, "res"],
+ ["PSY660", "Research Design", "R", "—", 2, 3, 3, "res"],
+ ["PSY680", "Workshop on Quantitative Analysis", "R", "—", 2, 3, 3, "res"],
+ ["PSY351", "Foundations of Public Relations", "S", "—", 2, 1, 3, "soc"],
+ ["PSY353", "Image Building & Management", "S", "—", 2, 1, 3, "soc"],
+ ["SPS5500", "Group Processes & Intergroup Rel.", "S", "—", 2, 1, 3, "soc"],
+ ["PSY352", "Neuromarketing", "S", "—", 2, 2, 3, "soc"],
+ ["PSY390", "Effective Communication Skills", "S", "—", 2, 2, 3, "soc"],
+ ["PSY470", "Psychology of Advertising", "S", "—", 2, 2, 3, "soc"],
+ ["PSY555", "Animal Behavior & Psychology", "S", "—", 2, 2, 4, "soc"],
+ ["PSY650", "Media Psychology", "S", "—", 2, 2, 3, "soc"],
+ ["SPS5180", "Beliefs, Prejudices & Stereotypes", "S", "—", 2, 2, 3, "soc"],
+ ["PSY105", "Psychology in Marketing", "S", "—", 2, 3, 3, "soc"],
+ ["MIL100", "Basic Military Training (non-credit)", "NC", "—", 1, 2, 3, "prof"],
+ ["MPPG.C003", "Certificate Course", "CRT", "—", 2, 1, 2, "prof"]
+];
+
+const CCAT = {
+ seq:['Sequencing','#2563eb'], load:['Workload','#d97706'], data:['Data / НП','#dc2626'],
+ dup:['Duplication','#4338ca'], level:['Level','#9333ea'], cov:['Coverage','#0d9488']
+};
+/* per-course review concerns, categorised — surfaced on hover (replaces the prereq arrows).
+   each: [category, severity high|med|low, section-4 id or —, text]. */
+const CONCERNS = {
+ "PSY530":[["level", "med", "M-2", "7 of 8 outcomes are «name / know / have a formed understanding» — recall verbs for the course that opens the research thread."],
+   ["seq", "low", "S-5", "Requires Intro to Psychology in the same term (y1t1); also starts before any statistics course (MATH1109 only in t3)."],
+   ["data", "low", "S-2", "Contact hours: syllabus 70 vs НП 60."]],
+ "PSY310":[["level", "med", "M-2", "All 4 outcomes are familiarity-level («navigate / understand / be acquainted») — for a mandatory core course that 4+ electives cite as their foundation."],
+   ["dup", "low", "M-1", "Its research-design LO is a word-for-word template shared with PSY630 (Qualitative Methods)."]],
+ "PSY280":[["level", "med", "M-3", "5/8 outcomes «Understand / Become familiar» — written BELOW the previous term´s Psychopathology (recognize/apply/critically evaluate)."],
+   ["seq", "med", "S-3", "PSY370 Counseling and PSY500 Gender & Sexuality both require clinical-psychology knowledge — and both run in the SAME term as this course."],
+   ["data", "low", "S-2", "Contact hours: syllabus 80 (40+40) vs НП 60 (30+30)."]],
+ "PSY370":[["data", "high", "S-1", "Syllabus still describes the old 5-ECTS/150-h course; НП says 7 ECTS/210 h. The file itself carries the Academic Director´s note that the course was expanded."],
+   ["cov", "high", "C-1", "Despite «Crisis Intervention» in the title, the outcome list contains NO crisis-specific outcome — PSLO21 (the programme´s own promise) is undelivered."],
+   ["seq", "med", "S-3", "Wants Clinical Psychology as prior knowledge — scheduled the same term (y3t2)."]],
+ "PSY250":[["data", "high", "S-1", "ECTS mismatch: syllabus 4 (120 h) vs НП 5 (150 h); a 2023/24-cohort scheduling note still sits in the header."]],
+ "PSY500":[["seq", "med", "S-3", "Its syllabus requires knowledge from Developmental, Psychodiagnostics, Individual Differences, Neuropsychology AND Clinical Psychology — Clinical runs the same term (y3t2); the ОП scheme draws Clinical → Gender/Sexuality as ordered."]],
+ "PSY240":[["dup", "med", "M-4", "«Understand the classification systems (DSM-5, ICD-11)…» is a word-for-word duplicate of PSY280´s outcome — and this elective is offered from y2t3, before Psychopathology/Clinical."],
+   ["level", "low", "M-2", "5/8 outcomes non-measurable."]],
+ "PSY342":[["data", "high", "S-1", "ECTS mismatch: syllabus 2 (60 h) vs НП 3 (90 h)."]],
+ "PSY352":[["data", "high", "S-1", "ECTS mismatch: syllabus 4 (120 h, 60 contact) vs НП 3 (90 h, 30 contact)."],
+   ["seq", "med", "S-4", "Advises Cognitive Psychology (same term as earliest offering) and Neuropsychology (a YEAR later) as prior knowledge — the II–IV window opens too early."]],
+ "PSY680":[["data", "med", "S-1", "Header internally inconsistent: «3 ECTS (60 hours)» — 3 ECTS = 90 h; НП says 90."]],
+ "ENG132":[["dup", "med", "M-1", "Two outcomes are byte-identical to ENG131 and one nearly so — no declared progression between English I and II."]],
+ "PSY330":[["level", "low", "M-2", "Only 3 outcomes for a 6-ECTS course — the thinnest outcome-per-credit ratio in the programme."],
+   ["data", "low", "S-2", "Contact hours: syllabus 90 (23+22 sessions) vs НП 80 (40+40)."]],
+ "PSY490":[["level", "low", "M-2", "17 outcomes for a 3-ECTS course — reads like a programme-outcome list, not a course; fold to 5–7."],
+   ["data", "low", "S-2", "Dated 2026/2027 (future template)."]],
+ "PSY560":[["cov", "low", "T-3", "The only syllabus with no Prerequisites section at all."],
+   ["level", "low", "M-2", "16 outcomes for 3 ECTS; 5 non-measurable."],
+   ["data", "low", "S-2", "Contact hours: syllabus 50 vs НП 40."]],
+ "PS300":[["level", "med", "M-2", "All 10 extracted items are aims/values («Confidence in…», «A culture of…») — no Learning-outcomes or grading section in the file."],
+   ["data", "low", "S-2", "Header claims 30 contact hours = the course´s total (НП: 20 contact + 10 self)."]],
+ "PSY430":[["cov", "low", "C-2", "No labelled Learning-outcomes section (outcomes hide in the description) — the extracted ones are well-written."]],
+ "SCI220":[["data", "med", "S-2", "Header data error: «Contact Hours 120 hours» equals the course´s TOTAL; the session counts (13+17) give ~60 = НП."]],
+ "UKR111":[["data", "med", "S-2", "Header data error: «Class hours 60 hours» equals the course´s total; sessions (4 lect + 12 pract) give 32 = НП."]],
+ "SCI390":[["data", "low", "S-2", "Dated «2025/2025» (typo); contact 16+32=48 vs НП 60."],
+   ["level", "med", "M-2", "Outcomes are student-benefit prose («Be prepared to pursue advanced degrees…») — rewrite as measurable."]],
+ "MATH1109":[["data", "low", "S-2", "Two divergent file versions supplied (base + «(1)» with minor edits) — keep one canonical."]],
+ "PSY110":[["data", "med", "S-2", "Workload split diverges: syllabus 90 contact (50 lect) vs НП 64 (34)."],
+   ["level", "med", "M-2", "5/6 outcomes knowledge-framed («be familiar», «will have a well-developed understanding»)."]],
+ "PSY348":[["data", "low", "S-2", "File sits in the term-2 folder and header says Spring; НП offers the course in t3."]],
+ "PSY351":[["seq", "med", "S-4", "Elective window opens y2t1 — before Social Psychology (y2t2), which its syllabus leans on."]],
+ "PSY353":[["seq", "med", "S-4", "Window opens y2t1 — before Cognitive and Social Psychology (y2t2) that its text references."],
+   ["level", "med", "M-2", "7/9 outcomes non-measurable."]],
+ "SPS5500":[["seq", "low", "S-4", "Window opens y2t1, one term before Social Psychology."]],
+ "KSE101":[["cov", "med", "C-2", "The only mandatory course with no syllabus at all."]],
+ "MIL100":[["data", "high", "S-6", "НП row is arithmetically impossible: 200 classroom hours against a 90-hour total (self-study −110)."]],
+ "CP.PSY":[["data", "high", "S-6", "НП says 13 ECTS; ОП´s АТ.1 says 14 — and the ОП table sums to 181 against its own declared 180. Fix АТ.1 → 13."]],
+ "ATT1.PSY":[["data", "low", "S-6", "The Qualification Exam row sits inside the НП´s «Mandatory courses» block instead of the Атестація section."]],
+ "IS4.PS":[["seq", "med", "S-7", "The ОП scheme labels Internship-3 «Year 3»; the НП schedules it y4t2 — one document must be corrected."]],
+ "PSY344":[["level", "low", "M-2", "All 4 outcomes non-measurable; header says «Loans ECTS» (machine-translated «Кредити ЄКТС»)."]],
+ "PSY347":[["data", "low", "S-2", "НП: 0 lectures + 28 practice; syllabus: 7 lectures + 7 practicals — align the split."]],
+ "PSY660":[["level", "med", "M-2", "The Learning-outcomes section is a TOPIC LIST («mixed methods», «Q-Methodology») — rewrite as outcomes."]],
+ "PSY630":[["level", "low", "M-2", "All 3 outcomes non-measurable («navigate / understand / learn to»)."]],
+ "PSY343":[["level", "low", "M-2", "6/10 outcomes knowledge-framed."]],
+ "ECON302":[["data", "low", "S-2", "Dated 2026/2027 (future template)."]],
+ "PSY360":[["data", "low", "S-2", "Dated 2026/2027 (future template)."]],
+ "PSY480":[["data", "low", "S-2", "Dated 2026/2027; AI-policy section missing."]],
+ "PSY380":[["cov", "med", "C-1", "Only 3 outcomes on 3 ECTS — and it is the sole carrier of PSLO20 (career guidance), the programme´s own promise. One mastery-level LO would close the row."]],
+ "PSY340":[["level", "med", "M-2", "Outcomes in third-person knowledge form («The student knows and understands…»)."]],
+ "PSY550":[["level", "med", "M-2", "4/7 outcomes open with «know»; content (design, artifacts, mediation/moderation) is strong — verbs are not."],
+   ["cov", "low", "C-2", "Overview/materials sections missing."]]
+};
+const NAME={}; M.forEach(c=>NAME[c[0]]=c[1]); EL.forEach(e=>NAME[e[0]]=e[1]);
+// the sequence canvas omits the cross-course 'duplication' lens (it lives in section 4)
+Object.keys(CONCERNS).forEach(k=>{ CONCERNS[k]=CONCERNS[k].filter(c=>c[0]!=='dup');
+  if(!CONCERNS[k].length) delete CONCERNS[k]; });
+
+/* ----------------- BUILD FLOW DIAGRAM ----------------- */
+const flowCredits = Array(12).fill(0);
+M.forEach(c=>flowCredits[idx(c[2],c[3])]+=c[4]);
+
+const yh=document.getElementById('yearhead');
+TERMS.forEach((t,i)=>{
+  const d=document.createElement('div');
+  d.className='yh';
+  d.innerHTML=`${t[0]}<b>${t[1]}</b><span class="wk">${t[2]} wks · ${flowCredits[i]} ECTS</span>`;
+  yh.appendChild(d);
+});
+
+const grid=document.getElementById('grid');
+const cols=[];
+for(let i=0;i<12;i++){
+  const col=document.createElement('div'); col.className='col';
+  const cl=document.createElement('div');
+  const cr=flowCredits[i];
+  cl.className='credlbl'+(cr>=24?' over':(cr>=21?' heavy':''));
+  cl.textContent=cr+' ECTS';
+  col.appendChild(cl);
+  grid.appendChild(col); cols.push(col);
+}
+M.forEach(c=>{
+  const [code,name,y,t,cr,lec,prac,tr]=c;
+  const con=CONCERNS[code]||[];
+  const card=document.createElement('div');
+  card.className='card'+(con.length?' warnf':''); card.id='c-'+code;
+  card.dataset.code=code; card.dataset.track=tr;
+  card.style.borderLeftColor='var(--'+tr+')';
+  card.innerHTML=`<span class="cr">${cr}</span><div class="code">${code}</div><div class="nm">${name}</div>`+
+    (con.length?`<div class="flag" data-code="${code}">${con.length>1?con.length:'!'}</div>`:'');
+  cols[idx(y,t)].appendChild(card);
+});
+
+/* (hover tooltip now lives in the v7 review module below) */
+
+/* elective band */
+const eb=document.getElementById('elecband');
+const lbl=document.createElement('div'); lbl.className='bandlbl';
+lbl.textContent='Elective pool (60 ECTS, ≥40 from the programme; windows II–IV) — [C] Minor 1: Clinical · [R] Minor 2: Research · [S] Minor 3: Social & Organizational · [NC] non-credit · [CRT] certificate · minor rule: ≥14 ECTS + defended project';
+eb.appendChild(lbl);
+const ecols=[];
+for(let i=0;i<12;i++){const col=document.createElement('div');col.className='col el';eb.appendChild(col);ecols.push(col);}
+EL.forEach(e=>{
+  const [code,name,minor,block,y,t,cr,tr]=e;
+  const con=CONCERNS[code]||[];
+  const card=document.createElement('div');
+  card.className='card elec'+(con.length?' warnf':''); card.dataset.code=code; card.dataset.track=tr;
+  card.style.borderLeftColor='var(--'+tr+')';
+  card.innerHTML=`<span class="cr">${cr}</span><div class="code">${code} <span style="color:#8492a8">${minor}${block&&block!=='—'?'·'+block:''}</span></div><div class="nm">${name}</div>`+
+    (con.length?`<div class="flag" data-code="${code}">${con.length>1?con.length:'!'}</div>`:'');
+  ecols[idx(y,t)].appendChild(card);
+});
+
+/* ---------- v7 review & filter module ---------- */
+const SEVC={high:'var(--bad)',med:'var(--warn)',low:'var(--acc)'};
+const store={
+  key:'psyAuditTicks.v1',
+  data:JSON.parse(localStorage.getItem('psyAuditTicks.v1')||'{}'),
+  get(k){return !!this.data[k]},
+  set(k,v){ if(v)this.data[k]=1; else delete this.data[k];
+    localStorage.setItem(this.key,JSON.stringify(this.data)); refreshProgress(); }
+};
+
+const activeTracks=new Set(Object.keys(TR));
+const activeCats=new Set(Object.keys(CCAT));
+const activeSevs=new Set(['high','med','low']);
+let onlyFlagged=false, hideReviewed=false;
+
+function chipBtn(host,label,color,on,fn){
+  const b=document.createElement('button'); b.className='chipb'+(on?'':' off');
+  b.innerHTML=(color?`<span class="dot" style="background:${color}"></span>`:'')+label;
+  b.onclick=()=>{fn(b)}; host.appendChild(b); return b;
+}
+Object.entries(TR).forEach(([k,v])=>chipBtn(document.getElementById('fTracks'),v[0],v[1],true,b=>{
+  b.classList.toggle('off'); b.classList.contains('off')?activeTracks.delete(k):activeTracks.add(k); applyFilters();}));
+Object.entries(CCAT).forEach(([k,v])=>chipBtn(document.getElementById('fCats'),v[0],v[1],true,b=>{
+  b.classList.toggle('off'); b.classList.contains('off')?activeCats.delete(k):activeCats.add(k); applyFilters();}));
+['high','med','low'].forEach(s=>chipBtn(document.getElementById('fSevs'),s,SEVC[s],true,b=>{
+  b.classList.toggle('off'); b.classList.contains('off')?activeSevs.delete(s):activeSevs.add(s); applyFilters();}));
+document.getElementById('bFlag').onclick=e=>{onlyFlagged=!onlyFlagged;e.target.classList.toggle('off',!onlyFlagged);applyFilters();};
+document.getElementById('bHideRev').onclick=e=>{hideReviewed=!hideReviewed;e.target.classList.toggle('off',!hideReviewed);applyFilters();};
+document.getElementById('bReset').onclick=()=>{ if(!confirm('Clear all review ticks?'))return;
+  store.data={}; localStorage.setItem(store.key,'{}');
+  document.querySelectorAll('.find input,.pr input').forEach(i=>i.checked=false);
+  document.querySelectorAll('.find.done').forEach(f=>f.classList.remove('done'));
+  refreshProgress(); applyFilters(); };
+
+function visibleConcerns(code){
+  return (CONCERNS[code]||[]).map((c,i)=>({c,i}))
+    .filter(({c})=>activeCats.has(c[0])&&activeSevs.has(c[1]))
+    .filter(({i})=>!(hideReviewed&&store.get(code+'|'+i)));
+}
+function applyFilters(){
+  document.querySelectorAll('#flow .card').forEach(card=>{
+    const code=card.dataset.code, vis=visibleConcerns(code);
+    const trackOK=activeTracks.has(card.dataset.track);
+    card.classList.toggle('dim', !trackOK || (onlyFlagged&&!vis.length));
+    let flag=card.querySelector('.flag');
+    if((CONCERNS[code]||[]).length){
+      if(!vis.length){ if(flag)flag.style.display='none'; }
+      else{
+        if(flag)flag.style.display='';
+        const open=vis.filter(({i})=>!store.get(code+'|'+i)).length;
+        flag.classList.toggle('done',open===0);
+        flag.textContent=open===0?'✓':open;
+      }
+    }
+  });
+}
+function refreshProgress(){
+  const TOTAL_ISSUES=Object.values(CONCERNS).reduce((a,c)=>a+c.length,0)+F.length+document.querySelectorAll('[data-ak]').length;
+  const done=Object.keys(store.data).length;
+  document.getElementById('pdone').textContent=done;
+  document.getElementById('ptot').textContent=TOTAL_ISSUES;
+  document.getElementById('pfill').style.width=Math.round(done/TOTAL_ISSUES*100)+'%';
+  document.querySelectorAll('.find').forEach(f=>{
+    const k='F|'+f.dataset.fid; f.classList.toggle('done',store.get(k));
+    const cb=f.querySelector('input'); if(cb)cb.checked=store.get(k);
+  });
+  document.querySelectorAll('.act').forEach(a=>{
+    const k='A|'+a.dataset.an; a.classList.toggle('ok',store.get(k));
+    const cb=a.querySelector('input'); if(cb)cb.checked=store.get(k);
+  });
+}
+
+/* hover quick-look (kept) + click-to-pin checklist popover */
+(function(){
+  const tip=document.getElementById('tip'), flow=document.getElementById('flow');
+  const pop=document.createElement('div'); pop.id='pop'; document.body.appendChild(pop);
+  function tipHTML(code){
+    const vis=visibleConcerns(code); if(!vis.length)return '';
+    let h=`<div class="tip-h">${code} · ${NAME[code]||''} <span style="color:#94a0b4">(click badge to review)</span></div>`;
+    vis.forEach(({c})=>{const cc=CCAT[c[0]];
+      h+=`<div class="tip-row"><span class="tip-chip" style="background:${cc[1]}">${cc[0]}</span>${c[3]}`+
+         (c[2]&&c[2]!=='—'?`<span class="tip-id">${c[2]}</span>`:'')+`</div>`;});
+    return h;
+  }
+  function move(e){ const pad=14,r=tip.getBoundingClientRect();
+    let x=e.clientX+pad,y=e.clientY+pad;
+    if(x+r.width>innerWidth)x=e.clientX-r.width-pad;
+    if(y+r.height>innerHeight)y=e.clientY-r.height-pad;
+    tip.style.left=Math.max(6,x)+'px'; tip.style.top=Math.max(6,y)+'px'; }
+  flow.addEventListener('mouseover',e=>{ if(pop.classList.contains('show'))return;
+    const f=e.target.closest('.flag'); if(!f)return;
+    const h=tipHTML(f.dataset.code); if(!h)return;
+    tip.innerHTML=h; tip.classList.add('show'); move(e); });
+  flow.addEventListener('mousemove',e=>{ if(e.target.closest('.flag')&&!pop.classList.contains('show')) move(e); });
+  flow.addEventListener('mouseout',e=>{ if(e.target.closest('.flag')) tip.classList.remove('show'); });
+
+  function openPop(code,anchor){
+    tip.classList.remove('show');
+    const con=CONCERNS[code]||[];
+    let h=`<button class="x" title="close">×</button><h5>${code} · ${NAME[code]||''}</h5>
+      <div class="phint">Tick what you have reviewed / accepted — saved locally in your browser.</div>`;
+    con.forEach((c,i)=>{ const cc=CCAT[c[0]], k=code+'|'+i, done=store.get(k);
+      h+=`<div class="pr${done?' ok':''}"><input type="checkbox" data-k="${k}" ${done?'checked':''}>
+        <span class="ptext"><span class="tip-chip" style="background:${cc[1]}">${cc[0]}</span> ${c[3]}`+
+        (c[2]&&c[2]!=='—'?`<b class="pid"><a href="#s4" style="color:inherit">${c[2]}</a></b>`:'')+`</span></div>`;});
+    pop.innerHTML=h; pop.classList.add('show');
+    const r=anchor.getBoundingClientRect();
+    let x=r.left+r.width+10, y=r.top-8;
+    const pw=Math.min(470,innerWidth*0.92);
+    if(x+pw>innerWidth-8)x=Math.max(8,r.left-pw-10);
+    pop.style.left=x+'px';
+    pop.style.top='0px';
+    const ph=pop.getBoundingClientRect().height;
+    if(y+ph>innerHeight-8)y=Math.max(8,innerHeight-ph-8);
+    pop.style.top=Math.max(8,y)+'px';
+  }
+  flow.addEventListener('click',e=>{
+    const f=e.target.closest('.flag'); if(!f)return;
+    e.stopPropagation(); openPop(f.dataset.code,f);
+  });
+  pop.addEventListener('click',e=>{
+    if(e.target.classList.contains('x')){pop.classList.remove('show');return;}
+    e.stopPropagation();
+  });
+  pop.addEventListener('change',e=>{
+    const k=e.target.dataset.k; if(!k)return;
+    store.set(k,e.target.checked);
+    e.target.closest('.pr').classList.toggle('ok',e.target.checked);
+    applyFilters();
+  });
+  document.addEventListener('click',e=>{ if(!e.target.closest('#pop')&&!e.target.closest('.flag')) pop.classList.remove('show'); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') pop.classList.remove('show'); });
+})();
+
+
+/* ----------------- ELECTIVE TOGGLE ----------------- */
+let elecOn=true;
+function toggleElec(){elecOn=!elecOn;document.getElementById('elecband').style.display=elecOn?'':'none';
+  const b=document.getElementById('bE');b.textContent='Electives: '+(elecOn?'shown':'hidden');b.classList.toggle('on',!elecOn);}
+
+/* ----------------- WORKLOAD BARS ----------------- */
+const bars=document.getElementById('bars');
+const maxCr=26;
+TERMS.forEach((t,i)=>{
+  const cr=flowCredits[i];
+  const col=document.createElement('div');col.className='barcol';
+  const h=Math.round(cr/maxCr*150);
+  const cls=cr>=22?'over':(cr<=12?'light':'');
+  col.innerHTML=`<div class="barv">${cr}</div><div class="bar ${cls}" style="height:${h}px"></div>
+    <div class="barx">${t[0]}<br>${t[1].slice(0,3)}</div>`;
+  bars.appendChild(col);
+});
+const ref=document.createElement('div');ref.className='refline';
+ref.style.bottom=Math.round(37 + (20/maxCr*150))+'px';
+ref.innerHTML='<span>20 ECTS · full‑time norm</span>';
+bars.appendChild(ref);
+
+/* ----------------- KNOWLEDGE LANES ----------------- */
+const laneOrder=['found','res','assess','dev','soc','clin','couns','org','hum','lang','prof'];
+const lanes=document.getElementById('lanes');
+let thead='<thead><tr><th>Knowledge thread</th>';
+TERMS.forEach((t,i)=>{thead+=`<th class="yr">${t[0]}<br><span style="font-weight:400;color:var(--mut)">${t[1].slice(0,3)}</span></th>`;});
+thead+='</tr></thead>';
+lanes.innerHTML=thead;
+const tb=document.createElement('tbody');
+
+function cellCourses(track,i){
+  const m=M.filter(c=>c[7]===track&&idx(c[2],c[3])===i);
+  const e=EL.filter(c=>c[7]===track&&idx(c[4],c[5])===i);
+  return {m,e};
+}
+const laneGaps={};
+laneOrder.forEach(track=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td class="lane" style="border-left:4px solid ${TR[track][1]}">${TR[track][0]}</td>`;
+  const activeM=[];
+  for(let i=0;i<12;i++){if(M.some(c=>c[7]===track&&idx(c[2],c[3])===i))activeM.push(i);}
+  const firstA=activeM[0], lastA=activeM[activeM.length-1];
+  let gaps=0;
+  for(let i=0;i<12;i++){
+    const {m,e}=cellCourses(track,i);
+    const td=document.createElement('td');
+    const inSpan = (firstA!==undefined && i>firstA && i<lastA);
+    const isGap = inSpan && m.length===0;
+    if(isGap)gaps++;
+    td.className='cell'+(m.length||e.length?'':(isGap?' gap':' empty'));
+    let html='';
+    m.forEach(c=>html+=`<span class="chip m" style="background:${TR[track][1]}1f;border-color:${TR[track][1]}80;color:#1b2433">${c[0]}</span>`);
+    e.forEach(c=>html+=`<span class="chip e" style="border-color:${TR[track][1]}70;color:var(--mut)">${c[0]}<span style="color:#9aa6bd"> ${c[2]}</span></span>`);
+    td.innerHTML=html;
+    tr.appendChild(td);
+  }
+  laneGaps[track]=gaps;
+  tb.appendChild(tr);
+});
+lanes.appendChild(tb);
+
+document.getElementById('lanenotes').innerHTML =
+ '<b>Reading the threads:</b> <b>Foundations</b> are front-loaded into Y1–Y2 and hand off to two spines: the <b>Research thread</b> (Methods → Intro Math → Statistics → Experimental → Capstones → Thesis — continuous, but its outcomes are the worst-written in the corpus, M-2) and the <b>Clinical &amp; Neuro thread</b> (Neural Bases in Y1 t1, then an unbroken Y3 ladder Psychopathology/Neuro → Clinical → Psychotherapy/Psychopharm — exemplary shape, weak verbs in PSY280). <b>Assessment</b> is a clean two-step spiral (Y2 t2–t3). <b>Language</b> ends at Y1 t3 — nine dormant terms before the thesis (M-5). <b>Social</b> pauses in Y3 and returns as the applied Y4 tail (Political/Organizational/Consumer); <b>Worldview</b> has a Y2 t3–Y3 hole before Cultural &amp; Religious Diversity (Y4 t1). Electives (dashed) cluster in Y2–Y3 windows: the Clinical minor is the deepest (23 ECTS), Research the tightest (18 vs the 14-ECTS minor rule).';
+
+/* ----------------- FINDINGS (columns by type) ----------------- */
+const CATS = {
+ seq:['Sequencing & Logic','seq'], load:['Workload & Balance','load'],
+ cov:['Outcome Coverage','cov'], trk:['Tracks & Electives','trk'],
+ meth:['Methodology & Progression','meth']
+};
+// [cat, sev, id, title, body, fix]
+const F = [
+ ["seq", "high", "S‑1", "Hard syllabus↔plan ECTS collisions — including the flagship counseling course", "<code>PSY370</code> Counseling &amp; Crisis Intervention: syllabus <b>5 ECTS / 150 h</b> vs НП <b>7 / 210</b> — the file itself contains the Academic Director´s comment that the course was expanded, but the body was never updated. <code>PSY250</code> Psychopathology <b>4 vs 5</b>; electives <code>PSY342</code> <b>2 vs 3</b> and <code>PSY352</code> <b>4 vs 3</b>; <code>PSY680</code>´s header is internally inconsistent («3 ECTS (60 hours)»).", "Reissue the five syllabi against the НП rows; for PSY370 use the rewrite to add the missing crisis outcomes (C-1)."],
+ ["seq", "med", "S‑2", "Header data errors and stale headers across ~15 syllabi", "Two headers claim contact = total (<code>SCI220</code> «120 h contact», <code>UKR111</code> «60 h») while their own session counts match the НП. Real workload-split divergences: <code>PSY110</code> 90 vs 64, <code>PSY280</code> 80 vs 60, <code>PSY330</code> 90 vs 80, <code>PSY530</code> 70 vs 60, <code>PSY560</code> 50 vs 40. Four Y3–Y4 syllabi are dated <b>2026/2027</b>, <code>SCI390</code> says «2025/2025», and <code>MATH1109</code> ships in two divergent copies.", "Fix the two contact=total cells; reconcile the five splits; reissue dated headers for 2025/26."],
+ ["seq", "med", "S‑3", "The clinical spine is compressed: prerequisite and dependent course share a term — twice", "The ОП´s own scheme draws Group&nbsp;Work/Counseling → Clinical → Gender&amp;Sexuality as a sequence, and the syllabi agree (<code>PSY500</code> explicitly requires Clinical Psychology; <code>PSY370</code> wants it as prior knowledge). The НП schedules <code>PSY280</code>, <code>PSY370</code> and <code>PSY500</code> <b>all in y3t2</b>.", "Move PSY500 to y3t3 (currently 10 ECTS) or y4t1 (7 ECTS); state PSY370´s co-requisite status explicitly."],
+ ["seq", "med", "S‑4", "Elective windows open before their declared foundations", "The social/organizational minor´s window starts <b>y2t1</b>: <code>PSY351</code> PR and <code>PSY353</code> Image Building precede Social and Cognitive Psychology (y2t2) that their texts lean on; <code>PSY352</code> Neuromarketing advises Neuropsychology — taught a year after its window opens. A second-year student can formally enter these with zero psychology-specific foundations.", "Shift Minor-3 windows to «II t2 – IV» (or III–IV), or drop the prerequisite claims from the syllabi."],
+ ["seq", "low", "S‑5", "Methods of Psychological Research starts before its own supports", "<code>PSY530</code> (y1t1) requires Intro to Psychology <b>in the same term</b> and promises data-analysis outcomes while the first statistics course (<code>MATH1109</code>) only arrives in y1t3 and <code>STAT254</code> in y2t1.", "Mark PSY230 as a co-requisite; scope PSY530´s analysis outcomes to qualitative/pre-statistical methods."],
+ ["seq", "high", "S‑6", "НП data errors: an impossible row, a misplaced exam, a thesis-ECTS conflict", "<code>MIL100</code>: <b>200 classroom hours against a 90-hour total</b> (self-study −110) — an arithmetically impossible row. The Qualification Exam (<code>ATT1.PSY</code>) sits inside the «Mandatory courses» block instead of Атестація. The thesis is <b>13 ECTS in the НП but 14 in the ОП</b> (АТ.1) — which is why the ОП´s own table sums to 181 against its declared 180.", "Fix the MIL100 row; move ATT1.PSY to the attestation block; set АТ.1 = 13 in the ОП."],
+ ["seq", "med", "S‑7", "The ОП scheme and the НП disagree on one year label; six scheme edges are same-term", "The scheme labels Internship-3 «<b>Year 3</b>» — the НП schedules <code>IS4.PS</code> in <b>y4t2</b>. Otherwise the scheme is the cleanest of the three programmes audited (every НП course is drawn, no ghost nodes) — but six of its edges connect courses scheduled in the SAME term (Psychopathology→Group Work, Counseling→Clinical, Clinical→Gender, Social→Cognitive/Propaganda, Cultural→Political, Indiv. Differences→Experimental), so the declared order is not realised by the timetable.", "Correct the internship label; for the six same-term edges either re-schedule (S-3) or accept them as co-requisites explicitly."],
+ ["load", "med", "W‑1", "Year 1 carries 56 ECTS; Year 4 mandatory is 32", "Mandatory loads: <b>Y1 = 56</b> (22/19/15) · Y2 = 49 · Y3 = 43 · Y4 = 32 (7/11/14). No term exceeds 24 ECTS (better than CS29´s 63-ECTS Y1), but the same front-loading shape: six exam courses in y1t1 alone (5 exams).", "If revising, move one y1t1 course (e.g. SCI340) to the lighter y1t3."],
+ ["load", "low", "W‑2", "Capstones and internships stack into the short summer terms", "<code>CP1.PS</code>+<code>IS2.PS</code> share y2t3 (12 ECTS mandatory + electives — 10 of 25 electives are offered only in t3 windows), <code>CP2.PS</code>+<code>IS3.PS</code> share y3t3. Milder than AI29´s terminal-term crunch, but the research deliverables always land in the 8-week term.", "Keep — but cap elective ECTS in t3 terms, or allow capstone defence early in the following term."],
+ ["load", "low", "W‑3", "Year 4 is elective-dependent by design", "Y4 mandatory is 7/11/14 ECTS; students must fill ~28 elective ECTS there. The catalog offers 72 programme-elective ECTS against the 60 required (40 from programme electives) — feasible, but 10 of 25 electives exist only in t2 windows and none in y4t3.", "Publish a recommended per-term elective placement so Y4 terms stay ≤ 20 ECTS next to the thesis."],
+ ["cov", "high", "C‑1", "Two of the programme´s six OWN promises are not delivered", "On the adjusted 63×25 I/R/M matrix, <b>22 of 25 PLOs are guaranteed</b> — the whole C4-standard minimum is covered (the inverse of AI29). What fails is KSE´s own layer: <b>PSLO21</b> (crisis interventions) has <b>no R/M anywhere on the mandatory path</b> — its named carrier <code>PSY370</code> has «Crisis Intervention» in the title and zero crisis outcomes in the (outdated, 5-ECTS) syllabus; <b>PSLO20</b> (career guidance) rests on a single R from <code>PSY380</code> — a course with 3 outcomes.", "2–3 crisis LOs in the PSY370 rewrite + 1 mastery LO in PSY380 close both rows. No new courses needed."],
+ ["cov", "med", "C‑2", "PLO19 + GC13 (military layer) live outside the credit curriculum", "The standard´s military rows are carried only by <code>MIL100</code> — a <b>non-credit</b> elective whose НП row is arithmetically impossible (S-6). <code>PS300</code> First Aid is an adjacent touch (Rule-A adjusted: first aid ≠ military training). The ОП itself footnotes PLO19 as delivered through basic military training for UA citizens.", "Document the non-credit mechanism formally and fix the MIL100 row — a paper fix, no new content."],
+ ["cov", "med", "C‑3", "12 of 22 guaranteed PLOs are breadth-without-mastery — and the verb problem is why", "These rows hold ≥2 R but no M. The mastery cells that DO exist concentrate in the applied tail (PSY360, PSY540/440, PSY560, PSY590). 17 courses sit in the Rule-B cap set (≥50% non-measurable outcomes — M capped at R), including the research-methods thread itself: after a verb rewrite, several R-cells would likely confirm as M.", "Rewrite the cap-set courses´ outcomes first (psy-lo-quality.md cheat-sheet); then re-run the matrix — cheaper than adding depth courses."],
+ ["cov", "low", "C‑4", "Five supplied files match no НП component; coverage is otherwise the best of three programmes", "<b>62 of 63 usable syllabi map to НП codes; only KSE101 lacks one</b> (AI29: whole Y4 missing; CS29: 10 missing). The five orphans: «Training Design» (filed in the MANDATORY tree, y3t1), «Political Marketing», «Psychological First Aid», «Government Relations», «Power, hierarchy and social class». Internships/capstones/thesis are covered by separate guideline documents.", "Either add the five to the НП elective catalog (Psychological First Aid would also reinforce PSLO21) or remove them from the working folders."],
+ ["trk", "low", "T‑1", "Elective share is exactly at the statutory floor: 25.0%", "<b>60 of 240 ECTS = 25.0%</b> — passes ≥25% with <b>zero margin</b> (AI29: 31.2%; CS29 fails at 21.7%). Any future trim of the elective pool breaks the statute. The НП´s own rule: 60 ECTS total, ≥40 from programme electives.", "Treat 60 ECTS as a hard floor in every future НП edit."],
+ ["trk", "low", "T‑2", "Minor rules are uniform (a positive control), but catalog sizes differ 23 / 18 / 31 ECTS", "All three minors use the same rule — «≥14 ECTS from the minor + defended research project» (AI29´s six minors ranged ~7–40 ECTS with incomparable rules). Research minor offers 18 ECTS against the 14 threshold — the tightest margin; one course cancellation breaks it.", "Keep the uniform rule; watch the Research minor´s catalog depth."],
+ ["trk", "low", "T‑3", "The syllabus template´s «Dependent courses» field is used in opposite senses", "ENG131 lists courses that depend ON it; PSY680/PSY343 list courses they depend on — same field name, inverted meaning; PSY560 omits the prerequisites section entirely.", "Split the template field into «Prerequisites» and «Prepares for»."],
+ ["meth", "med", "M‑1", "Copy-paste outcomes: English I ↔ II verbatim; a research-design template shared across courses", "Two <code>ENG131</code>/<code>ENG132</code> outcomes are byte-identical and one nearly so — no declared progression. <code>PSY310</code> and <code>PSY630</code> share the same «specific theoretical and methodological requirements for designing research in X» sentence.", "Declare the ENG II level increment (CEFR markers, harder genres); each course states its own research-design contribution."],
+ ["meth", "med", "M‑2", "70% measurable outcomes — but the defects sit in the research-methods thread", "328/467 outcomes (70%) pass the holistic verb test (CS29 87%, AI29 68%). The worst courses are the ones that should set the operationalisation standard: <code>PSY530</code> Methods 7/8 flagged, <code>PSY660</code> Research Design (topic list as outcomes), <code>PSY630</code> 3/3, <code>PSY310</code> 4/4 — while the clinical-therapy thread (<code>PSY270</code>/<code>PSY370</code>/<code>PSY590</code>) is spotless.", "Rewrite the research-thread outcomes first — they also gate C-3´s mastery confirmations."],
+ ["meth", "med", "M‑3", "Depth inversion: Clinical Psychology is written below its own prerequisite", "<code>PSY250</code> Psychopathology (y3t1) already demands <i>recognize / apply interviewing skills / critically evaluate literature</i>; the next-term <code>PSY280</code> Clinical Psychology promises «Understand / Become familiar with major mental disorders».", "Raise PSY280 to application level (conduct initial clinical assessment, plan screening) — its actual content supports it."],
+ ["meth", "low", "M‑4", "DSM-5 / ICD-11 appears in four courses; an elective introduces it first", "The mandatory chain <code>PSY250</code>→<code>PSY280</code>→<code>PSY270</code> is a legitimate spiral (recognize→assess→apply). But elective <code>PSY240</code> Mental Health Lab duplicates PSY280´s classification outcome word-for-word and is offered from y2t3 — before either.", "In PSY240, replace the duplicated LO with a reference/recap and its own contribution."],
+ ["meth", "low", "M‑5", "English ends in Year 1; academic writing has no support at thesis time", "<code>ENG131→132→133</code> complete by y1t3 — then nothing for nine terms until the qualification thesis. Several later courses run in English (PSY200, PSY440, SCI390…), which mitigates in practice, and УКР111 (2 ECTS, y1t3) is the only Ukrainian academic-language course.", "Add a Ukrainian/English academic-writing refresher near CP2/thesis (y3t3–y4), or an explicit writing module in the capstone guidelines."],
+ ["meth", "low", "M‑6", "Stage-1 document integrity is near-exemplary — a positive control", "All 46 НП components reconcile with the ОП by name (the ОП uses accreditation codes НД.xx — the newest template), totals match (158+9+13 = 180; +60 = 240; 7200 h), every taught row´s hour arithmetic is internally consistent, and no term exceeds 24 ECTS. The three exceptions are S-6´s rows. Course naming drifts between documents (НП «English for Study and Work (PSY)» vs ОП «English for Professional and Study Purposes»; НП «Educational Psychology» vs file «Psychology of Education»).", "Fix S-6; align the three renamed titles in the next document edit."]
+];
+
+/* what each check searched for — shown via the (i) on each finding */
+const SEARCHED = {
+ "S-1":"Compared every syllabus ECTS/hours header against its \u041d\u041f row (63 files).",
+ "S-2":"Parsed each header\u00b4s year/season/contact cells; cross-checked against session counts and \u041d\u041f hour columns.",
+ "S-3":"Checked prerequisite declarations (syllabi) and scheme edges against same-term scheduling.",
+ "S-4":"Compared each elective\u00b4s \u041d\u041f availability window against the semesters of its declared prerequisites.",
+ "S-5":"Looked for same-term or later-term courses named as prior knowledge in mandatory-course prerequisites.",
+ "S-6":"Validated every \u041d\u041f row\u00b4s arithmetic (ects\u00d730 = total; classroom+self = total; lec+pract = classroom) and block placement; diffed thesis/exam rows against the \u041e\u041f table.",
+ "S-7":"Digitized the \u041e\u041f section-VII scheme (logical_scheme.png) and diffed nodes, year labels and edge order against the \u041d\u041f.",
+ "W-1":"Summed mandatory ECTS and exam counts per term against the ~20 ECTS norm.",
+ "W-2":"Looked for terminal deliverables (capstones, internships) sharing short terms.",
+ "W-3":"Checked Y4 mandatory load against the unplaced 60-ECTS elective requirement and per-term catalog windows.",
+ "C-1":"Built the 63\u00d725 course\u00d7PLO I/R/M matrix (Gemini, N=3, ordinal median, documented Rule-A/B adjustments); verdict = \u22651 M or \u22652 R on the mandatory path.",
+ "C-2":"Traced PLO19/GC13 carriers through the matrix and the \u041e\u041f\u00b4s own footnote.",
+ "C-3":"Classified each guaranteed PLO\u00b4s term-ordered pattern (spiral / breadth / introduced-only) and intersected with the Rule-B cap set.",
+ "C-4":"Matched all 68 supplied files against \u041d\u041f components by normalized English name (+alias table).",
+ "T-1":"Computed the elective ECTS share against the \u226525% statutory minimum.",
+ "T-2":"Compared the three minors\u00b4 selection rules and catalog totals against their thresholds.",
+ "T-3":"Compared the direction of \u00abDependent courses\u00bb references across all 63 prerequisites sections.",
+ "M-1":"Cross-course near-duplicate scan over all 467 outcome texts (token Jaccard \u2265 0.45).",
+ "M-2":"Stage-2C measurable-verb rubric (Gemini, N=3 majority) over all 467 extracted outcomes.",
+ "M-3":"Compared outcome verb levels of prerequisite\u2192dependent course pairs for inversions.",
+ "M-4":"Clustered canonical topics from outcome text; flagged topics in \u22652 courses without a depth split.",
+ "M-5":"Traced each knowledge thread for multi-term dormancy before dependent deliverables.",
+ "M-6":"Stage-1 checks: name-based \u041e\u041f\u2194\u041d\u041f reconciliation, totals, per-row hour arithmetic, per-term loads."
+};
+const fc=document.getElementById('findings');
+Object.entries(CATS).forEach(([key,meta])=>{
+  const col=document.createElement('div');col.className='fcol '+meta[1];
+  const items=F.filter(f=>f[0]===key);
+  let html=`<h3 class="cat">${meta[0]}<span class="ct">${items.length}</span></h3>`;
+  items.forEach(f=>{
+    const [,sev,id,title,body,fix]=f;
+    const nid=id.replace(/\u2011/g,'-');
+    const q=SEARCHED[nid]||'';
+    html+=`<div class="find ${sev}" data-fid="${nid}"><span class="sev ${sev}">${sev}</span><span class="id">${id}</span>`+
+      (q?` <span class="finfo" data-tip="${q}">i</span>`:'')+
+      `<label class="rv"><input type="checkbox" data-fk="F|${nid}">reviewed</label>`+
+      `<h4>${title}</h4><p>${body}</p><div class="fix">↳ <b>Fix:</b> ${fix}</div></div>`;
+  });
+  col.innerHTML=html; fc.appendChild(col);
+});
+
+document.getElementById('findings').addEventListener('change',e=>{
+  const k=e.target.dataset.fk; if(!k)return; store.set(k,e.target.checked);
+  e.target.closest('.find').classList.toggle('done',e.target.checked);
+});
+/* (i) tooltip on findings — reuses #tip */
+(function(){
+  const tip=document.getElementById('tip'), root=document.getElementById('findings');
+  function move(e){
+    const pad=14,r=tip.getBoundingClientRect();
+    let x=e.clientX+pad,y=e.clientY+pad;
+    if(x+r.width>innerWidth)x=e.clientX-r.width-pad;
+    if(y+r.height>innerHeight)y=e.clientY-r.height-pad;
+    tip.style.left=Math.max(6,x)+'px'; tip.style.top=Math.max(6,y)+'px';
+  }
+  root.addEventListener('mouseover',e=>{
+    const t=e.target.closest('.finfo'); if(!t)return;
+    tip.innerHTML=`<div class="tip-row"><span class="tip-chip" style="background:#475569">Searched</span>${t.dataset.tip}</div>`;
+    tip.classList.add('show'); move(e);
+  });
+  root.addEventListener('mousemove',e=>{ if(e.target.closest('.finfo')) move(e); });
+  root.addEventListener('mouseout',e=>{ if(e.target.closest('.finfo')) tip.classList.remove('show'); });
+})();
+
+/* ----------------- РН COVERAGE TABLE ----------------- */
+const PLOM = [
+ ["PLO1", "std", "man", "Analyse & explain mental phenomena", "", [[1, "PSY230", "I"], [1, "PSY430", "I"], [1, "PSY530", "I"], [1, "SCI340", "I"], [2, "ENG132", "I"], [2, "PSY330", "I"], [2, "PSY570", "R"], [2, "SCI220", "I"], [3, "MATH1109", "I"], [3, "PSY110", "I"], [4, "PSY340", "R"], [4, "PSY510", "I"], [4, "PSY550", "I"], [4, "STAT254", "I"], [5, "PSY310", "I"], [5, "PSY440", "I"], [5, "PSY670", "R"], [5, "SCI400", "I"], [6, "PSY380", "I"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "R"], [7, "PSY490", "R"], [7, "PSY560", "I"], [8, "PSY280", "R"], [8, "PSY370", "R"], [8, "PSY500", "R"], [9, "PSY270", "R"], [9, "PSY590", "R"], [10, "PSY301", "I"], [11, "ECON302", "R"], [11, "PSY360", "R"]]],
+ ["PLO2", "std", "man", "Development & functioning of mental phenomena", "", [[1, "ENG131", "I"], [1, "PSY230", "I"], [1, "PSY430", "R"], [1, "PSY530", "I"], [1, "SCI340", "I"], [2, "ENG132", "I"], [2, "PSY330", "I"], [2, "PSY570", "R"], [2, "SCI220", "R"], [3, "MATH1109", "I"], [3, "PSY110", "R"], [4, "PSY340", "R"], [4, "PSY510", "R"], [4, "PSY550", "I"], [4, "STAT254", "I"], [5, "PSY310", "I"], [5, "PSY440", "R"], [5, "PSY670", "R"], [5, "SCI400", "I"], [6, "PSY380", "I"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "R"], [7, "PSY490", "R"], [7, "PSY560", "R"], [8, "PSY280", "R"], [8, "PSY370", "R"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "R"], [10, "PSY301", "I"], [10, "PSY480", "I"], [11, "ECON302", "R"], [11, "PSY360", "M"]]],
+ ["PLO3", "std", "man", "Information search & ICT", "", [[1, "ENG131", "I"], [1, "PSY430", "I"], [1, "PSY530", "R"], [2, "ENG132", "I"], [2, "SCI220", "I"], [3, "ENG133", "I"], [3, "MATH1109", "I"], [3, "UKR111", "I"], [4, "PSY340", "I"], [4, "PSY550", "I"], [4, "SCI390", "I"], [4, "STAT254", "R"], [5, "PSY310", "I"], [5, "PSY440", "I"], [5, "PSY670", "I"], [5, "SCI400", "R"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "I"], [7, "PSY490", "R"], [8, "PSY500", "I"], [9, "PSY270", "I"], [9, "PSY590", "I"], [10, "PSY301", "I"], [11, "ECON302", "I"], [11, "PSY360", "I"]]],
+ ["PLO4", "std", "man", "Independent conclusions from own research", "", [[1, "ENG131", "I"], [1, "PSY230", "I"], [1, "PSY430", "I"], [1, "PSY530", "R"], [1, "SCI340", "R"], [2, "ENG132", "I"], [2, "PSY330", "R"], [2, "PSY570", "I"], [2, "SCI220", "R"], [3, "ENG133", "R"], [3, "MATH1109", "R"], [3, "PSY110", "I"], [3, "UKR111", "I"], [4, "PSY340", "R"], [4, "PSY510", "I"], [4, "PSY550", "R"], [4, "SCI390", "I"], [4, "STAT254", "R"], [5, "PSY310", "I"], [5, "PSY440", "R"], [5, "PSY670", "I"], [5, "SCI400", "I"], [6, "PSY380", "I"], [6, "PSY540", "R"], [7, "PSY200", "R"], [7, "PSY250", "R"], [7, "PSY490", "R"], [7, "PSY560", "I"], [8, "PSY280", "I"], [8, "PSY370", "I"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "R"], [10, "PSY301", "R"], [10, "PSY480", "R"], [11, "ECON302", "R"], [11, "PSY360", "R"]]],
+ ["PLO5", "std", "man", "Select & apply psychodiagnostic instruments", "", [[1, "PSY530", "I"], [2, "PSY570", "I"], [2, "SCI220", "I"], [3, "MATH1109", "I"], [3, "PS300", "I"], [3, "PSY110", "I"], [4, "PSY340", "R"], [4, "PSY510", "R"], [4, "STAT254", "R"], [5, "PSY310", "I"], [5, "PSY440", "M"], [5, "PSY670", "R"], [6, "PSY540", "R"], [7, "PSY200", "R"], [7, "PSY250", "I"], [7, "PSY490", "I"], [7, "PSY560", "I"], [8, "PSY280", "R"], [8, "PSY370", "I"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "R"], [11, "PSY360", "R"]]],
+ ["PLO6", "std", "man", "Formulate aims, collect primary data", "", [[1, "PSY430", "I"], [1, "PSY530", "R"], [1, "SCI340", "I"], [2, "PSY330", "I"], [2, "SCI220", "R"], [3, "ENG133", "I"], [3, "MATH1109", "R"], [3, "UKR111", "I"], [4, "PSY340", "I"], [4, "PSY510", "I"], [4, "PSY550", "R"], [4, "SCI390", "I"], [4, "STAT254", "R"], [5, "PSY310", "I"], [5, "PSY440", "I"], [5, "PSY670", "I"], [6, "PSY540", "R"], [7, "PSY200", "I"], [7, "PSY490", "I"]]],
+ ["PLO7", "std", "man", "Evaluate validity & reliability of findings", "", [[1, "ENG131", "I"], [1, "PSY230", "I"], [1, "PSY430", "I"], [1, "PSY530", "R"], [1, "SCI340", "I"], [2, "ENG132", "I"], [2, "PSY330", "I"], [2, "PSY570", "I"], [2, "SCI220", "R"], [3, "ENG133", "I"], [3, "MATH1109", "R"], [4, "PSY340", "R"], [4, "PSY510", "I"], [4, "PSY550", "R"], [4, "SCI390", "I"], [4, "STAT254", "M"], [5, "PSY310", "I"], [5, "PSY440", "R"], [5, "PSY670", "R"], [5, "SCI400", "I"], [6, "PSY380", "I"], [6, "PSY540", "R"], [7, "PSY200", "R"], [7, "PSY250", "I"], [7, "PSY490", "R"], [7, "PSY560", "I"], [8, "PSY280", "I"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "R"], [10, "PSY301", "R"], [10, "PSY480", "I"], [11, "ECON302", "R"], [11, "PSY360", "R"]]],
+ ["PLO8", "std", "man", "Present research results", "", [[1, "ENG131", "R"], [1, "PSY230", "I"], [1, "PSY530", "R"], [1, "SCI340", "I"], [2, "ENG132", "R"], [2, "PSY570", "I"], [2, "SCI220", "R"], [3, "ENG133", "R"], [3, "MATH1109", "R"], [3, "UKR111", "R"], [4, "PSY550", "I"], [4, "SCI390", "I"], [4, "STAT254", "I"], [6, "PSY540", "R"], [7, "PSY200", "R"], [7, "PSY490", "R"], [7, "PSY560", "I"], [8, "PSY500", "I"], [9, "PSY590", "I"], [10, "PSY301", "I"], [10, "PSY480", "I"], [11, "PSY360", "I"]]],
+ ["PLO9", "std", "man", "Independent approaches to professional tasks", "", [[1, "PSY530", "I"], [2, "ENG132", "I"], [2, "PSY330", "I"], [2, "PSY570", "I"], [2, "SCI220", "I"], [3, "MATH1109", "I"], [3, "PS300", "I"], [4, "PSY340", "I"], [4, "PSY510", "I"], [4, "PSY550", "R"], [4, "STAT254", "I"], [5, "PSY440", "I"], [5, "PSY670", "I"], [5, "SCI400", "I"], [6, "PSY380", "I"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "R"], [7, "PSY490", "R"], [7, "PSY560", "R"], [8, "PSY280", "I"], [8, "PSY370", "R"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "R"], [11, "ECON302", "R"], [11, "PSY360", "M"]]],
+ ["PLO10", "std", "man", "Argue, discuss, adapt communication", "", [[1, "ENG131", "R"], [1, "PSY230", "I"], [1, "PSY530", "I"], [1, "SCI340", "R"], [2, "ENG132", "R"], [2, "PSY330", "I"], [2, "PSY570", "I"], [2, "SCI220", "R"], [3, "ENG133", "R"], [3, "MATH1109", "I"], [3, "PSY110", "I"], [3, "UKR111", "R"], [4, "PSY510", "I"], [4, "SCI390", "I"], [4, "STAT254", "I"], [5, "SCI400", "I"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "I"], [7, "PSY490", "R"], [7, "PSY560", "R"], [8, "PSY280", "R"], [8, "PSY370", "R"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "I"], [10, "PSY301", "R"], [10, "PSY480", "R"], [11, "ECON302", "I"], [11, "PSY360", "R"]]],
+ ["PLO11", "std", "man", "Develop & implement a counselling plan", "exactly 3 R (PSY370/PSY270/PSY490-family) — counseling-plan mastery would fit PSY370´s 7 ECTS", [[2, "ENG132", "I"], [2, "SCI220", "I"], [3, "PS300", "I"], [4, "PSY340", "I"], [4, "PSY510", "I"], [5, "PSY310", "I"], [5, "PSY440", "I"], [6, "PSY380", "I"], [7, "PSY200", "I"], [7, "PSY250", "I"], [7, "PSY490", "I"], [7, "PSY560", "I"], [8, "PSY280", "I"], [8, "PSY370", "R"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "R"]]],
+ ["PLO12", "std", "man", "Psychoeducational & preventive programmes", "", [[1, "ENG131", "I"], [1, "PSY230", "R"], [2, "ENG132", "I"], [2, "SCI220", "I"], [3, "UKR111", "I"], [5, "PSY670", "R"], [5, "SCI400", "I"], [7, "PSY200", "I"], [7, "PSY250", "I"], [7, "PSY490", "R"], [7, "PSY560", "M"], [8, "PSY500", "I"], [9, "PSY590", "I"], [10, "PSY480", "I"], [11, "PSY360", "M"]]],
+ ["PLO13", "std", "man", "Tolerant interaction across differences", "", [[1, "ENG131", "R"], [1, "PSY230", "I"], [1, "PSY530", "I"], [2, "ENG132", "R"], [2, "SCI220", "R"], [3, "PSY110", "I"], [3, "UKR111", "I"], [4, "PSY340", "R"], [4, "PSY510", "I"], [4, "SCI390", "I"], [5, "PSY440", "I"], [5, "PSY670", "I"], [7, "PSY200", "R"], [7, "PSY250", "R"], [7, "PSY490", "R"], [7, "PSY560", "R"], [8, "PSY280", "R"], [8, "PSY370", "R"], [8, "PSY500", "R"], [9, "PSY270", "I"], [9, "PSY590", "I"], [10, "PSY301", "I"], [10, "PSY480", "R"], [11, "ECON302", "R"], [11, "PSY360", "R"]]],
+ ["PLO14", "std", "man", "Team roles & leadership", "", [[1, "ENG131", "R"], [1, "PSY530", "R"], [2, "ENG132", "R"], [3, "MATH1109", "I"], [3, "PS300", "I"], [4, "STAT254", "I"], [7, "PSY200", "R"], [7, "PSY250", "I"], [7, "PSY490", "I"], [7, "PSY560", "R"], [8, "PSY500", "I"], [11, "PSY360", "R"]]],
+ ["PLO15", "std", "man", "Lifelong learning & self-development", "", [[1, "ENG131", "I"], [1, "PSY430", "I"], [1, "PSY530", "I"], [1, "SCI340", "I"], [2, "ENG132", "I"], [2, "PSY570", "I"], [2, "SCI220", "I"], [3, "ENG133", "I"], [3, "MATH1109", "I"], [3, "PS300", "I"], [3, "PSY110", "I"], [3, "UKR111", "I"], [4, "PSY340", "I"], [4, "PSY510", "R"], [4, "PSY550", "I"], [4, "SCI390", "I"], [4, "STAT254", "R"], [5, "PSY440", "I"], [5, "SCI400", "I"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "I"], [7, "PSY490", "R"], [7, "PSY560", "M"], [8, "PSY280", "I"], [8, "PSY370", "R"], [8, "PSY500", "I"], [9, "PSY270", "R"], [9, "PSY590", "I"], [10, "PSY301", "I"], [10, "PSY480", "I"], [11, "ECON302", "I"], [11, "PSY360", "I"]]],
+ ["PLO16", "std", "man", "Professional ethics", "the healthiest thread: 15 carriers from y1t1 ethics to y3t3 psychopharmacology, 2 M", [[1, "PSY230", "R"], [1, "PSY530", "R"], [2, "SCI220", "R"], [3, "ENG133", "I"], [3, "UKR111", "I"], [4, "PSY340", "R"], [4, "PSY550", "I"], [5, "PSY440", "R"], [6, "PSY380", "R"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "R"], [7, "PSY490", "R"], [7, "PSY560", "R"], [8, "PSY280", "I"], [8, "PSY370", "M"], [8, "PSY500", "R"], [9, "PSY270", "R"], [9, "PSY590", "M"], [11, "ECON302", "R"], [11, "PSY360", "I"]]],
+ ["PLO17", "std", "man", "Socially responsible civic behaviour", "", [[1, "PSY230", "I"], [1, "SCI340", "I"], [2, "SCI220", "I"], [3, "PS300", "R"], [3, "UKR111", "I"], [4, "PSY340", "I"], [4, "SCI390", "I"], [5, "PSY670", "I"], [5, "SCI400", "R"], [7, "PSY200", "I"], [7, "PSY250", "I"], [7, "PSY490", "I"], [7, "PSY560", "I"], [8, "PSY370", "I"], [8, "PSY500", "I"], [9, "PSY270", "I"], [9, "PSY590", "I"], [10, "PSY301", "R"], [10, "PSY480", "R"], [11, "ECON302", "R"], [11, "PSY360", "I"]]],
+ ["PLO18", "std", "man", "Own health & well-being of others", "guaranteed with zero margin (exactly 2 R) — a third touch would not hurt", [[2, "PSY570", "I"], [3, "PS300", "R"], [4, "PSY510", "I"], [7, "PSY250", "I"], [7, "PSY490", "R"], [7, "PSY560", "I"], [8, "PSY280", "I"], [8, "PSY370", "I"], [9, "PSY270", "I"], [9, "PSY590", "I"], [11, "PSY360", "I"]]],
+ ["PLO19", "std", "thin", "Basic military knowledge & skills *", "carried only by non-credit MIL100 (broken НП row — S-6); PS300 adjusted M→I (first aid ≠ military training); ОП footnotes the mechanism", [[3, "PS300", "I"], [5, "SCI400", "I"]]],
+ ["PSLO20", "kse", "thin", "Career guidance & vocational orientation", "single R from PSY380 — a 3-outcome course; one mastery LO closes the row (C-1)", [[1, "ENG131", "I"], [6, "PSY380", "R"], [7, "PSY560", "I"], [11, "PSY360", "I"]]],
+ ["PSLO21", "kse", "elec", "Crisis psychological interventions", "named carrier PSY370 has zero crisis outcomes in its outdated syllabus (C-1, S-1)", [[3, "PS300", "I"], [7, "PSY200", "I"], [7, "PSY250", "I"], [7, "PSY490", "I"], [7, "PSY560", "I"], [8, "PSY280", "I"], [8, "PSY370", "I"], [9, "PSY270", "I"], [9, "PSY590", "I"]]],
+ ["PSLO22", "kse", "man", "Screening & preliminary assessment of disorders", "", [[1, "PSY430", "I"], [2, "PSY570", "I"], [3, "MATH1109", "I"], [3, "PS300", "I"], [3, "PSY110", "I"], [4, "PSY340", "I"], [4, "PSY510", "I"], [4, "STAT254", "I"], [5, "PSY440", "R"], [6, "PSY540", "I"], [7, "PSY200", "R"], [7, "PSY250", "R"], [8, "PSY280", "R"], [8, "PSY500", "I"], [9, "PSY270", "I"], [9, "PSY590", "I"]]],
+ ["PSLO23", "kse", "man", "Psychopharmacology literacy", "", [[1, "PSY430", "I"], [7, "PSY250", "I"], [9, "PSY590", "M"]]],
+ ["PSLO24", "kse", "man", "Design & develop psychodiagnostic instruments", "the psychometric spiral PSY440 → PSY540 delivers this cleanly — 2 M", [[1, "PSY530", "I"], [4, "PSY510", "I"], [4, "PSY550", "I"], [4, "STAT254", "I"], [5, "PSY440", "M"], [6, "PSY540", "M"], [11, "PSY360", "I"]]],
+ ["PSLO25", "kse", "man", "Group formats: facilitation, trainings, supervision", "", [[1, "ENG131", "I"], [2, "ENG132", "I"], [3, "PSY110", "I"], [5, "PSY670", "I"], [7, "PSY200", "I"], [7, "PSY490", "I"], [7, "PSY560", "M"], [10, "PSY480", "I"], [11, "PSY360", "R"]]]
+];
+
+const VLAB={man:'guaranteed',thin:'thin',elec:'elective-only',gap:'content gap'};
+const VDESC={man:'Delivered on the mandatory path (≥1 M or ≥2 R)',
+ thin:'Touched, but no depth on the mandatory path',
+ elec:'Real depth exists only in electives — not guaranteed to every graduate',
+ gap:'Nearby courses touch the area (the I-chips), but the specific content this outcome names is taught nowhere'};
+const LDESC={std:'C4-standard minimum (PLO1–19): wording cannot be changed — only content can fix a red or amber row',
+ kse:'The university´s own addition above the standard — wording IS editable'};
+const LMEAN={I:'Introduce — touches the content at a lower level',R:'Reinforce — comparable level, partial scope',M:'Master — substantially delivers the outcome'};
+const pVerd=new Set(['man','thin','elec']), pLayer=new Set(['std','kse']);
+let hideI=false;
+[['man','#067a52'],['thin','#9a6206'],['elec','#b42121']].forEach(([v,c])=>chipBtn(document.getElementById('pfVerd'),v==='elec'?'not guaranteed':VLAB[v],c,true,b=>{
+  b.classList.toggle('off'); b.classList.contains('off')?pVerd.delete(v):pVerd.add(v); renderPlom();}));
+[['std','#475569'],['kse','#6d28d9']].forEach(([l,c])=>chipBtn(document.getElementById('pfLayer'),l.toUpperCase(),c,true,b=>{
+  b.classList.toggle('off'); b.classList.contains('off')?pLayer.delete(l):pLayer.add(l); renderPlom();}));
+document.getElementById('bHideI').onclick=e=>{hideI=!hideI;e.target.classList.toggle('on',hideI);renderPlom();};
+
+function renderPlom(){
+  const t=document.getElementById('plom');
+  let h='<thead><tr><th style="text-align:left">Outcome</th>';
+  TERMS.forEach((tm,i)=>{const y4='';
+    h+=`<th class="yr" >${tm[0]}<br><span style="font-weight:400;color:var(--mut)">${tm[1].slice(0,3)}</span>${y4}</th>`;});
+  h+='</tr></thead><tbody>';
+  PLOM.forEach(([pid,layer,tag,name,note,cells])=>{
+    if(!pVerd.has(tag==='gap'?'elec':tag)||!pLayer.has(layer))return;
+    h+=`<tr><td class="lane"><b>${pid}</b><span class="pvk ${layer}">${layer.toUpperCase()}</span> `+
+       `<span class="tag ${tag}">${VLAB[tag]}</span><div class="plname">${name}</div>`+
+       (note?`<div class="plnote">${note}</div>`:'')+`</td>`;
+    for(let s=1;s<=12;s++){
+      const cc=cells.filter(c=>c[0]===s&&!(hideI&&c[2]==='I'));
+      h+=`<td class="cell${cc.length?'':' empty'}">`+cc.map(c=>
+        `<span class="pc ${c[2]}" title="${(NAME[c[1]]||c[1])} — ${LMEAN[c[2]]}">${c[1]}<small>${c[2]}</small></span>`).join('')+'</td>';
+    }
+    h+='</tr>';
+  });
+  t.innerHTML=h+'</tbody>';
+}
+const COMPM = [
+ ["SC1", "sc", "man", "Conceptual & categorical apparatus", "", [[1, "ENG131", "I", "PLO2"], [1, "PSY230", "I", "PLO1"], [1, "PSY430", "R", "PLO2"], [1, "PSY530", "I", "PLO1"], [1, "SCI340", "I", "PLO1"], [2, "ENG132", "I", "PLO1"], [2, "PSY330", "I", "PLO1"], [2, "PSY570", "R", "PLO1"], [2, "SCI220", "R", "PLO2"], [3, "MATH1109", "I", "PLO1"], [3, "PSY110", "R", "PLO2"], [4, "PSY340", "R", "PLO1"], [4, "PSY510", "R", "PLO2"], [4, "PSY550", "I", "PLO1"], [4, "STAT254", "I", "PLO1"], [5, "PSY310", "I", "PLO1"], [5, "PSY440", "R", "PLO2"], [5, "PSY670", "R", "PLO1"], [5, "SCI400", "I", "PLO1"], [6, "PSY380", "I", "PLO1"], [6, "PSY540", "I", "PLO1"], [7, "PSY200", "R", "PLO1"], [7, "PSY250", "R", "PLO1"], [7, "PSY490", "R", "PLO1"], [7, "PSY560", "R", "PLO2"], [8, "PSY280", "R", "PLO1"], [8, "PSY370", "R", "PLO1"], [8, "PSY500", "R", "PLO1"], [9, "PSY270", "R", "PLO1"], [9, "PSY590", "R", "PLO1"], [10, "PSY301", "I", "PLO1"], [10, "PSY480", "I", "PLO2"], [11, "ECON302", "R", "PLO1"], [11, "PSY360", "M", "PLO2"]]],
+ ["SC2", "sc", "man", "Retrospective analysis of approaches", "", [[1, "ENG131", "I", "PLO2"], [1, "PSY230", "I", "PLO2"], [1, "PSY430", "R", "PLO2"], [1, "PSY530", "I", "PLO2"], [1, "SCI340", "I", "PLO2"], [2, "ENG132", "I", "PLO2"], [2, "PSY330", "I", "PLO2"], [2, "PSY570", "R", "PLO2"], [2, "SCI220", "R", "PLO2"], [3, "MATH1109", "I", "PLO2"], [3, "PSY110", "R", "PLO2"], [4, "PSY340", "R", "PLO2"], [4, "PSY510", "R", "PLO2"], [4, "PSY550", "I", "PLO2"], [4, "STAT254", "I", "PLO2"], [5, "PSY310", "I", "PLO2"], [5, "PSY440", "R", "PLO2"], [5, "PSY670", "R", "PLO2"], [5, "SCI400", "I", "PLO2"], [6, "PSY380", "I", "PLO2"], [6, "PSY540", "I", "PLO2"], [7, "PSY200", "R", "PLO2"], [7, "PSY250", "R", "PLO2"], [7, "PSY490", "R", "PLO2"], [7, "PSY560", "R", "PLO2"], [8, "PSY280", "R", "PLO2"], [8, "PSY370", "R", "PLO2"], [8, "PSY500", "R", "PLO2"], [9, "PSY270", "I", "PLO2"], [9, "PSY590", "R", "PLO2"], [10, "PSY301", "I", "PLO2"], [10, "PSY480", "I", "PLO2"], [11, "ECON302", "R", "PLO2"], [11, "PSY360", "M", "PLO2"]]],
+ ["SC3", "sc", "man", "Nature of behaviour; early intervention", "", [[1, "PSY230", "I", "PLO1"], [1, "PSY430", "I", "PLO1"], [1, "PSY530", "I", "PLO1"], [1, "SCI340", "I", "PLO1"], [2, "ENG132", "I", "PLO1"], [2, "PSY330", "I", "PLO1"], [2, "PSY570", "R", "PLO1"], [2, "SCI220", "I", "PLO1"], [3, "MATH1109", "I", "PLO1"], [3, "PS300", "I", "PLO9"], [3, "PSY110", "I", "PLO1"], [4, "PSY340", "R", "PLO1"], [4, "PSY510", "I", "PLO1"], [4, "PSY550", "R", "PLO9"], [4, "STAT254", "I", "PLO1"], [5, "PSY310", "I", "PLO1"], [5, "PSY440", "I", "PLO1"], [5, "PSY670", "R", "PLO1"], [5, "SCI400", "I", "PLO1"], [6, "PSY380", "I", "PLO1"], [6, "PSY540", "I", "PLO1"], [7, "PSY200", "R", "PLO1"], [7, "PSY250", "R", "PLO1"], [7, "PSY490", "R", "PLO1"], [7, "PSY560", "R", "PLO9"], [8, "PSY280", "R", "PLO1"], [8, "PSY370", "R", "PLO1"], [8, "PSY500", "R", "PLO1"], [9, "PSY270", "R", "PLO1"], [9, "PSY590", "R", "PLO1"], [10, "PSY301", "I", "PLO1"], [11, "ECON302", "R", "PLO1"], [11, "PSY360", "M", "PLO9"]]],
+ ["SC4", "sc", "man", "Collect & critically evaluate information", "", [[1, "ENG131", "I", "PLO3"], [1, "PSY230", "I", "PLO4"], [1, "PSY430", "I", "PLO3"], [1, "PSY530", "R", "PLO3"], [1, "SCI340", "R", "PLO4"], [2, "ENG132", "I", "PLO3"], [2, "PSY330", "R", "PLO4"], [2, "PSY570", "I", "PLO1"], [2, "SCI220", "R", "PLO4"], [3, "ENG133", "R", "PLO4"], [3, "MATH1109", "R", "PLO4"], [3, "PSY110", "I", "PLO4"], [3, "UKR111", "I", "PLO3"], [4, "PSY340", "R", "PLO4"], [4, "PSY510", "I", "PLO4"], [4, "PSY550", "R", "PLO4"], [4, "SCI390", "I", "PLO3"], [4, "STAT254", "R", "PLO3"], [5, "PSY310", "I", "PLO3"], [5, "PSY440", "R", "PLO4"], [5, "PSY670", "I", "PLO1"], [5, "SCI400", "R", "PLO3"], [6, "PSY380", "I", "PLO4"], [6, "PSY540", "R", "PLO4"], [7, "PSY200", "R", "PLO3"], [7, "PSY250", "R", "PLO4"], [7, "PSY490", "R", "PLO3"], [7, "PSY560", "I", "PLO4"], [8, "PSY280", "I", "PLO1"], [8, "PSY370", "I", "PLO1"], [8, "PSY500", "R", "PLO4"], [9, "PSY270", "I", "PLO1"], [9, "PSY590", "R", "PLO4"], [10, "PSY301", "R", "PLO4"], [10, "PSY480", "R", "PLO4"], [11, "ECON302", "R", "PLO4"], [11, "PSY360", "R", "PLO4"]]],
+ ["SC5", "sc", "man", "Valid & reliable psychodiagnostics", "", [[1, "PSY430", "I", "PSLO22"], [1, "PSY530", "I", "PLO5"], [2, "PSY570", "I", "PLO5"], [2, "SCI220", "I", "PLO5"], [3, "MATH1109", "I", "PLO5"], [3, "PS300", "I", "PLO5"], [3, "PSY110", "I", "PLO5"], [4, "PSY340", "R", "PLO5"], [4, "PSY510", "R", "PLO5"], [4, "STAT254", "R", "PLO5"], [5, "PSY310", "I", "PLO5"], [5, "PSY440", "M", "PLO5"], [5, "PSY670", "R", "PLO5"], [6, "PSY540", "R", "PLO5"], [7, "PSY200", "R", "PLO5"], [7, "PSY250", "R", "PSLO22"], [7, "PSY490", "I", "PLO5"], [7, "PSY560", "I", "PLO5"], [8, "PSY280", "R", "PLO5"], [8, "PSY370", "I", "PLO5"], [8, "PSY500", "R", "PLO5"], [9, "PSY270", "I", "PLO5"], [9, "PSY590", "R", "PLO5"], [11, "PSY360", "R", "PLO5"]]],
+ ["SC6", "sc", "man", "Plan, organise & conduct research", "", [[1, "PSY430", "I", "PLO6"], [1, "PSY530", "R", "PLO6"], [1, "SCI340", "I", "PLO6"], [2, "PSY330", "I", "PLO6"], [2, "SCI220", "R", "PLO6"], [3, "ENG133", "I", "PLO6"], [3, "MATH1109", "R", "PLO6"], [3, "UKR111", "I", "PLO6"], [4, "PSY340", "I", "PLO6"], [4, "PSY510", "I", "PLO6"], [4, "PSY550", "R", "PLO6"], [4, "SCI390", "I", "PLO6"], [4, "STAT254", "R", "PLO6"], [5, "PSY310", "I", "PLO6"], [5, "PSY440", "R", "PSLO24"], [5, "PSY670", "I", "PLO6"], [6, "PSY540", "R", "PLO6"], [7, "PSY200", "I", "PLO6"], [7, "PSY490", "I", "PLO6"]]],
+ ["SC7", "sc", "man", "Systematise findings; evidence-based conclusions", "", [[1, "ENG131", "I", "PLO4"], [1, "PSY230", "I", "PLO4"], [1, "PSY430", "I", "PLO4"], [1, "PSY530", "R", "PLO4"], [1, "SCI340", "R", "PLO4"], [2, "ENG132", "I", "PLO4"], [2, "PSY330", "R", "PLO4"], [2, "PSY570", "I", "PLO4"], [2, "SCI220", "R", "PLO4"], [3, "ENG133", "R", "PLO4"], [3, "MATH1109", "R", "PLO4"], [3, "PSY110", "I", "PLO4"], [3, "UKR111", "I", "PLO4"], [4, "PSY340", "R", "PLO4"], [4, "PSY510", "I", "PLO4"], [4, "PSY550", "R", "PLO4"], [4, "SCI390", "I", "PLO4"], [4, "STAT254", "M", "PLO7"], [5, "PSY310", "I", "PLO4"], [5, "PSY440", "R", "PLO4"], [5, "PSY670", "R", "PLO7"], [5, "SCI400", "I", "PLO4"], [6, "PSY380", "I", "PLO4"], [6, "PSY540", "R", "PLO4"], [7, "PSY200", "R", "PLO4"], [7, "PSY250", "R", "PLO4"], [7, "PSY490", "R", "PLO4"], [7, "PSY560", "I", "PLO4"], [8, "PSY280", "I", "PLO4"], [8, "PSY370", "I", "PLO4"], [8, "PSY500", "R", "PLO4"], [9, "PSY270", "I", "PLO4"], [9, "PSY590", "R", "PLO4"], [10, "PSY301", "R", "PLO4"], [10, "PSY480", "R", "PLO4"], [11, "ECON302", "R", "PLO4"], [11, "PSY360", "R", "PLO4"]]],
+ ["SC8", "sc", "man", "Psychological services & support", "", [[1, "ENG131", "I", "PSLO25"], [1, "PSY530", "I", "PLO5"], [2, "ENG132", "I", "PLO9"], [2, "PSY330", "I", "PLO9"], [2, "PSY570", "I", "PLO5"], [2, "SCI220", "I", "PLO5"], [3, "MATH1109", "I", "PLO5"], [3, "PS300", "I", "PLO5"], [3, "PSY110", "I", "PLO5"], [4, "PSY340", "R", "PLO5"], [4, "PSY510", "R", "PLO5"], [4, "PSY550", "R", "PLO9"], [4, "STAT254", "R", "PLO5"], [5, "PSY310", "I", "PLO5"], [5, "PSY440", "M", "PLO5"], [5, "PSY670", "R", "PLO5"], [5, "SCI400", "I", "PLO9"], [6, "PSY380", "I", "PLO9"], [6, "PSY540", "R", "PLO5"], [7, "PSY200", "R", "PLO5"], [7, "PSY250", "R", "PLO9"], [7, "PSY490", "R", "PLO9"], [7, "PSY560", "M", "PSLO25"], [8, "PSY280", "R", "PLO5"], [8, "PSY370", "R", "PLO9"], [8, "PSY500", "R", "PLO5"], [9, "PSY270", "I", "PLO5"], [9, "PSY590", "R", "PLO5"], [10, "PSY480", "I", "PSLO25"], [11, "ECON302", "R", "PLO9"], [11, "PSY360", "M", "PLO9"]]],
+ ["SC9", "sc", "man", "Psychoeducation & prevention", "", [[1, "ENG131", "I", "PLO12"], [1, "PSY230", "R", "PLO12"], [2, "ENG132", "I", "PLO12"], [2, "SCI220", "I", "PLO12"], [3, "UKR111", "I", "PLO12"], [5, "PSY670", "R", "PLO12"], [5, "SCI400", "I", "PLO12"], [6, "PSY380", "R", "PSLO20"], [7, "PSY200", "I", "PLO12"], [7, "PSY250", "I", "PLO12"], [7, "PSY490", "R", "PLO12"], [7, "PSY560", "M", "PLO12"], [8, "PSY500", "I", "PLO12"], [9, "PSY590", "I", "PLO12"], [10, "PSY480", "I", "PLO12"], [11, "PSY360", "M", "PLO12"]]],
+ ["SC10", "sc", "man", "Professional ethics", "", [[1, "PSY230", "R", "PLO16"], [1, "PSY530", "R", "PLO16"], [2, "SCI220", "R", "PLO16"], [3, "ENG133", "I", "PLO16"], [3, "UKR111", "I", "PLO16"], [4, "PSY340", "R", "PLO16"], [4, "PSY550", "I", "PLO16"], [5, "PSY440", "R", "PLO16"], [6, "PSY380", "R", "PLO16"], [6, "PSY540", "I", "PLO16"], [7, "PSY200", "R", "PLO16"], [7, "PSY250", "R", "PLO16"], [7, "PSY490", "R", "PLO16"], [7, "PSY560", "R", "PLO16"], [8, "PSY280", "I", "PLO16"], [8, "PSY370", "M", "PLO16"], [8, "PSY500", "R", "PLO16"], [9, "PSY270", "R", "PLO16"], [9, "PSY590", "M", "PLO16"], [11, "ECON302", "R", "PLO16"], [11, "PSY360", "I", "PLO16"]]],
+ ["SC11", "sc", "man", "Self-improvement & lifelong learning", "", [[1, "ENG131", "I", "PLO15"], [1, "PSY430", "I", "PLO15"], [1, "PSY530", "I", "PLO15"], [1, "SCI340", "I", "PLO15"], [2, "ENG132", "I", "PLO15"], [2, "PSY570", "I", "PLO15"], [2, "SCI220", "I", "PLO15"], [3, "ENG133", "I", "PLO15"], [3, "MATH1109", "I", "PLO15"], [3, "PS300", "I", "PLO15"], [3, "PSY110", "I", "PLO15"], [3, "UKR111", "I", "PLO15"], [4, "PSY340", "I", "PLO15"], [4, "PSY510", "R", "PLO15"], [4, "PSY550", "I", "PLO15"], [4, "SCI390", "I", "PLO15"], [4, "STAT254", "R", "PLO15"], [5, "PSY440", "I", "PLO15"], [5, "SCI400", "I", "PLO15"], [6, "PSY540", "I", "PLO15"], [7, "PSY200", "R", "PLO15"], [7, "PSY250", "I", "PLO15"], [7, "PSY490", "R", "PLO15"], [7, "PSY560", "M", "PLO15"], [8, "PSY280", "I", "PLO15"], [8, "PSY370", "R", "PLO15"], [8, "PSY500", "I", "PLO15"], [9, "PSY270", "R", "PLO15"], [9, "PSY590", "I", "PLO15"], [10, "PSY301", "I", "PLO15"], [10, "PSY480", "I", "PLO15"], [11, "ECON302", "I", "PLO15"], [11, "PSY360", "I", "PLO15"]]],
+ ["GC1", "gc", "man", "Apply knowledge in practice", "", [[1, "ENG131", "R", ""], [1, "PSY230", "I", ""], [1, "PSY430", "I", ""], [1, "PSY530", "R", ""], [1, "SCI340", "I", ""], [2, "ENG132", "R", ""], [2, "PSY330", "I", ""], [2, "PSY570", "R", ""], [2, "SCI220", "R", ""], [3, "MATH1109", "R", ""], [3, "PS300", "R", ""], [3, "PSY110", "I", ""], [3, "UKR111", "I", ""], [4, "PSY340", "R", ""], [4, "PSY510", "R", ""], [4, "PSY550", "R", ""], [4, "SCI390", "I", ""], [4, "STAT254", "R", ""], [5, "PSY310", "I", ""], [5, "PSY440", "R", ""], [5, "PSY670", "R", ""], [5, "SCI400", "R", ""], [6, "PSY380", "R", ""], [6, "PSY540", "R", ""], [7, "PSY200", "R", ""], [7, "PSY250", "R", ""], [7, "PSY490", "R", ""], [7, "PSY560", "R", ""], [8, "PSY280", "R", ""], [8, "PSY370", "R", ""], [8, "PSY500", "R", ""], [9, "PSY270", "R", ""], [9, "PSY590", "R", ""], [10, "PSY301", "I", ""], [10, "PSY480", "I", ""], [11, "ECON302", "R", ""], [11, "PSY360", "M", ""]]],
+ ["GC2", "gc", "man", "Subject-area knowledge", "", [[1, "ENG131", "I", ""], [1, "PSY230", "R", ""], [1, "PSY430", "R", ""], [1, "PSY530", "R", ""], [1, "SCI340", "R", ""], [2, "ENG132", "I", ""], [2, "PSY330", "R", ""], [2, "PSY570", "M", ""], [2, "SCI220", "R", ""], [3, "MATH1109", "R", ""], [3, "PS300", "R", ""], [3, "PSY110", "R", ""], [3, "UKR111", "R", ""], [4, "PSY340", "R", ""], [4, "PSY510", "R", ""], [4, "PSY550", "R", ""], [4, "SCI390", "I", ""], [4, "STAT254", "M", ""], [5, "PSY310", "R", ""], [5, "PSY440", "M", ""], [5, "PSY670", "R", ""], [5, "SCI400", "R", ""], [6, "PSY380", "R", ""], [6, "PSY540", "R", ""], [7, "PSY200", "R", ""], [7, "PSY250", "R", ""], [7, "PSY490", "R", ""], [7, "PSY560", "R", ""], [8, "PSY280", "R", ""], [8, "PSY370", "M", ""], [8, "PSY500", "M", ""], [9, "PSY270", "R", ""], [9, "PSY590", "M", ""], [10, "PSY301", "R", ""], [10, "PSY480", "R", ""], [11, "ECON302", "R", ""], [11, "PSY360", "M", ""]]],
+ ["GC3", "gc", "man", "ICT skills", "", [[1, "ENG131", "I", ""], [1, "PSY430", "I", ""], [1, "PSY530", "R", ""], [2, "ENG132", "I", ""], [2, "SCI220", "I", ""], [3, "MATH1109", "I", ""], [3, "UKR111", "I", ""], [4, "PSY550", "I", ""], [4, "SCI390", "I", ""], [4, "STAT254", "M", ""], [5, "PSY310", "I", ""], [5, "PSY670", "I", ""], [5, "SCI400", "R", ""], [6, "PSY540", "I", ""], [7, "PSY200", "I", ""], [7, "PSY250", "I", ""], [7, "PSY490", "I", ""], [7, "PSY560", "I", ""], [8, "PSY500", "I", ""], [9, "PSY270", "I", ""], [10, "PSY301", "I", ""], [11, "ECON302", "I", ""], [11, "PSY360", "I", ""]]],
+ ["GC4", "gc", "man", "Learn & acquire contemporary knowledge", "", [[1, "ENG131", "I", ""], [1, "PSY230", "I", ""], [1, "PSY430", "I", ""], [1, "PSY530", "I", ""], [1, "SCI340", "R", ""], [2, "ENG132", "I", ""], [2, "PSY330", "I", ""], [2, "PSY570", "I", ""], [2, "SCI220", "I", ""], [3, "MATH1109", "I", ""], [3, "PS300", "I", ""], [3, "PSY110", "I", ""], [3, "UKR111", "I", ""], [4, "PSY340", "R", ""], [4, "PSY510", "I", ""], [4, "PSY550", "R", ""], [4, "SCI390", "I", ""], [4, "STAT254", "R", ""], [5, "PSY310", "I", ""], [5, "PSY440", "I", ""], [5, "PSY670", "I", ""], [5, "SCI400", "I", ""], [6, "PSY380", "I", ""], [6, "PSY540", "I", ""], [7, "PSY200", "R", ""], [7, "PSY250", "I", ""], [7, "PSY490", "R", ""], [7, "PSY560", "M", ""], [8, "PSY280", "I", ""], [8, "PSY370", "R", ""], [8, "PSY500", "I", ""], [9, "PSY270", "R", ""], [9, "PSY590", "I", ""], [10, "PSY301", "I", ""], [10, "PSY480", "I", ""], [11, "ECON302", "I", ""], [11, "PSY360", "R", ""]]],
+ ["GC5", "gc", "man", "Critical thinking & self-reflection", "", [[1, "ENG131", "R", ""], [1, "PSY230", "I", ""], [1, "PSY430", "I", ""], [1, "PSY530", "R", ""], [1, "SCI340", "R", ""], [2, "ENG132", "R", ""], [2, "PSY330", "R", ""], [2, "PSY570", "R", ""], [2, "SCI220", "R", ""], [3, "MATH1109", "R", ""], [3, "PS300", "I", ""], [3, "PSY110", "I", ""], [3, "UKR111", "I", ""], [4, "PSY340", "R", ""], [4, "PSY510", "R", ""], [4, "PSY550", "R", ""], [4, "SCI390", "I", ""], [4, "STAT254", "M", ""], [5, "PSY310", "I", ""], [5, "PSY440", "R", ""], [5, "PSY670", "R", ""], [5, "SCI400", "R", ""], [6, "PSY380", "R", ""], [6, "PSY540", "R", ""], [7, "PSY200", "R", ""], [7, "PSY250", "R", ""], [7, "PSY490", "R", ""], [7, "PSY560", "M", ""], [8, "PSY280", "R", ""], [8, "PSY370", "M", ""], [8, "PSY500", "R", ""], [9, "PSY270", "R", ""], [9, "PSY590", "R", ""], [10, "PSY301", "R", ""], [10, "PSY480", "R", ""], [11, "ECON302", "R", ""], [11, "PSY360", "R", ""]]],
+ ["GC6", "gc", "man", "Informed decisions", "", [[1, "ENG131", "I", ""], [1, "PSY230", "I", ""], [1, "PSY530", "I", ""], [1, "SCI340", "I", ""], [2, "ENG132", "I", ""], [2, "PSY330", "I", ""], [2, "PSY570", "I", ""], [2, "SCI220", "I", ""], [3, "MATH1109", "R", ""], [3, "PS300", "R", ""], [3, "UKR111", "I", ""], [4, "PSY340", "I", ""], [4, "PSY510", "I", ""], [4, "PSY550", "R", ""], [4, "SCI390", "I", ""], [4, "STAT254", "R", ""], [5, "PSY440", "R", ""], [5, "PSY670", "I", ""], [5, "SCI400", "I", ""], [6, "PSY380", "I", ""], [6, "PSY540", "R", ""], [7, "PSY200", "R", ""], [7, "PSY250", "R", ""], [7, "PSY490", "R", ""], [7, "PSY560", "R", ""], [8, "PSY280", "I", ""], [8, "PSY370", "R", ""], [8, "PSY500", "R", ""], [9, "PSY270", "I", ""], [9, "PSY590", "R", ""], [10, "PSY301", "I", ""], [10, "PSY480", "I", ""], [11, "ECON302", "R", ""], [11, "PSY360", "M", ""]]],
+ ["GC7", "gc", "man", "Creativity", "", [[1, "ENG131", "I", ""], [1, "PSY230", "I", ""], [1, "PSY530", "I", ""], [1, "SCI340", "I", ""], [2, "ENG132", "I", ""], [2, "PSY330", "I", ""], [2, "SCI220", "I", ""], [3, "PSY110", "I", ""], [3, "UKR111", "I", ""], [4, "PSY510", "I", ""], [4, "PSY550", "R", ""], [4, "STAT254", "I", ""], [5, "PSY440", "I", ""], [5, "PSY670", "I", ""], [6, "PSY540", "M", ""], [7, "PSY200", "I", ""], [7, "PSY250", "I", ""], [7, "PSY490", "I", ""], [7, "PSY560", "I", ""], [8, "PSY370", "I", ""], [8, "PSY500", "I", ""], [9, "PSY270", "I", ""], [9, "PSY590", "I", ""], [10, "PSY301", "I", ""], [10, "PSY480", "I", ""], [11, "ECON302", "I", ""], [11, "PSY360", "R", ""]]],
+ ["GC8", "gc", "man", "Interpersonal skills", "", [[1, "ENG131", "R", ""], [1, "PSY230", "I", ""], [1, "PSY530", "I", ""], [2, "ENG132", "R", ""], [2, "SCI220", "R", ""], [3, "MATH1109", "I", ""], [3, "PS300", "I", ""], [3, "PSY110", "I", ""], [3, "UKR111", "R", ""], [4, "PSY340", "I", ""], [4, "PSY510", "R", ""], [4, "SCI390", "I", ""], [5, "PSY670", "R", ""], [7, "PSY200", "R", ""], [7, "PSY250", "I", ""], [7, "PSY490", "R", ""], [7, "PSY560", "M", ""], [8, "PSY280", "R", ""], [8, "PSY370", "M", ""], [8, "PSY500", "R", ""], [9, "PSY270", "I", ""], [9, "PSY590", "I", ""], [10, "PSY301", "I", ""], [10, "PSY480", "R", ""], [11, "ECON302", "I", ""], [11, "PSY360", "R", ""]]],
+ ["GC9", "gc", "man", "Teamwork", "", [[1, "ENG131", "R", ""], [1, "PSY530", "R", ""], [2, "ENG132", "R", ""], [3, "MATH1109", "I", ""], [3, "PS300", "I", ""], [4, "STAT254", "I", ""], [7, "PSY200", "R", ""], [7, "PSY250", "I", ""], [7, "PSY490", "I", ""], [7, "PSY560", "M", ""], [8, "PSY500", "I", ""], [11, "PSY360", "R", ""]]],
+ ["GC10", "gc", "man", "Civic rights & democratic values", "", [[1, "PSY230", "I", ""], [1, "SCI340", "I", ""], [2, "SCI220", "I", ""], [3, "PS300", "R", ""], [3, "UKR111", "I", ""], [4, "PSY340", "I", ""], [4, "SCI390", "I", ""], [5, "PSY670", "I", ""], [5, "SCI400", "R", ""], [6, "PSY380", "I", ""], [7, "PSY200", "I", ""], [7, "PSY250", "I", ""], [7, "PSY490", "I", ""], [7, "PSY560", "I", ""], [8, "PSY370", "I", ""], [8, "PSY500", "I", ""], [9, "PSY270", "I", ""], [9, "PSY590", "I", ""], [10, "PSY301", "R", ""], [10, "PSY480", "R", ""], [11, "ECON302", "R", ""], [11, "PSY360", "I", ""]]],
+ ["GC11", "gc", "man", "Moral, cultural & scientific values", "", [[1, "PSY230", "I", ""], [1, "PSY430", "I", ""], [1, "PSY530", "I", ""], [1, "SCI340", "R", ""], [2, "PSY330", "R", ""], [2, "PSY570", "I", ""], [2, "SCI220", "R", ""], [3, "PS300", "R", ""], [3, "PSY110", "I", ""], [3, "UKR111", "I", ""], [4, "PSY340", "I", ""], [4, "PSY550", "I", ""], [4, "SCI390", "I", ""], [5, "PSY310", "I", ""], [5, "PSY440", "I", ""], [5, "SCI400", "I", ""], [7, "PSY200", "I", ""], [7, "PSY250", "I", ""], [7, "PSY490", "I", ""], [7, "PSY560", "I", ""], [8, "PSY500", "I", ""], [9, "PSY270", "I", ""], [10, "PSY301", "I", ""], [10, "PSY480", "R", ""], [11, "ECON302", "I", ""], [11, "PSY360", "I", ""]]],
+ ["GC12", "gc", "man", "Anti-corruption integrity", "", [[1, "PSY230", "R", ""], [1, "PSY530", "I", ""], [2, "SCI220", "I", ""], [3, "UKR111", "I", ""], [4, "PSY340", "I", ""], [4, "PSY550", "I", ""], [5, "PSY440", "I", ""], [6, "PSY380", "M", ""], [6, "PSY540", "I", ""], [7, "PSY200", "I", ""], [7, "PSY250", "I", ""], [7, "PSY490", "R", ""], [7, "PSY560", "I", ""], [8, "PSY370", "R", ""], [8, "PSY500", "I", ""], [9, "PSY270", "I", ""], [9, "PSY590", "M", ""], [11, "ECON302", "I", ""], [11, "PSY360", "I", ""]]],
+ ["GC13", "gc", "thin", "Defence of Ukraine", "formal carrier is non-credit MIL100 — document the mechanism (mirror of PLO19)", [[3, "PS300", "R", ""], [5, "SCI400", "I", ""], [10, "PSY301", "I", ""]]]
+];
+const CVLAB={man:'formed',thin:'thin',gap:'unformed'};
+const CVDESC={man:'Formed on the mandatory path (≥1 M or ≥2 R)',
+ thin:'Touched, but no depth on the mandatory path',
+ gap:'No course forms it at all'};
+const cVerd=new Set(['man','thin','gap']), cKind=new Set(['sc','gc']);
+let cHideI=false;
+[['man','#067a52'],['thin','#9a6206'],['gap','#b42121']].forEach(([v,c])=>chipBtn(document.getElementById('cfVerd'),CVLAB[v],c,true,b=>{
+  b.classList.toggle('off'); b.classList.contains('off')?cVerd.delete(v):cVerd.add(v); renderComp();}));
+[['sc','#475569'],['gc','#0d9488']].forEach(([k,c])=>chipBtn(document.getElementById('cfKind'),k.toUpperCase(),c,true,b=>{
+  b.classList.toggle('off'); b.classList.contains('off')?cKind.delete(k):cKind.add(k); renderComp();}));
+document.getElementById('cHideI').onclick=e=>{cHideI=!cHideI;e.target.classList.toggle('on',cHideI);renderComp();};
+
+function renderComp(){
+  const t=document.getElementById('comp');
+  let h='<thead><tr><th style="text-align:left">Competency</th>';
+  TERMS.forEach((tm,i)=>{const y4='';
+    h+=`<th class="yr" >${tm[0]}<br><span style="font-weight:400;color:var(--mut)">${tm[1].slice(0,3)}</span>${y4}</th>`;});
+  h+='</tr></thead><tbody>';
+  let lastKind='';
+  COMPM.forEach(([cid,kind,tag,name,note,cells])=>{
+    if(!cVerd.has(tag)||!cKind.has(kind))return;
+    if(kind!==lastKind){lastKind=kind;
+      h+=`<tr><td colspan="13" style="background:var(--panel2);padding:5px 10px;font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--mut)">${kind==='sc'?'SPECIAL (SC) — flow through the PLO matrix':'GENERAL (GC) — direct LO-evidence pass'}</td></tr>`;}
+    h+=`<tr><td class="lane"><b>${cid}</b> <span class="tag ${tag}" title="${CVDESC[tag]}">${CVLAB[tag]}</span>`+
+       `<div class="plname">${name}</div>`+(note?`<div class="plnote">${note}</div>`:'')+`</td>`;
+    for(let s=1;s<=12;s++){
+      const cc=cells.filter(c=>c[0]===s&&!(cHideI&&c[2]==='I'));
+      h+=`<td class="cell${cc.length?'':' empty'}">`+cc.map(c=>
+        `<span class="pc ${c[2]}" title="${(NAME[c[1]]||c[1])} — ${LMEAN[c[2]]}${c[3]?' · via '+c[3]:''}">${c[1]}<small>${c[2]}</small></span>`).join('')+'</td>';
+    }
+    h+='</tr>';
+  });
+  t.innerHTML=h+'</tbody>';
+}
+renderComp();
+
+renderPlom();
+document.getElementById('acts').addEventListener('change',e=>{
+  const k=e.target.dataset.ak; if(!k)return; store.set(k,e.target.checked);
+  e.target.closest('.act').classList.toggle('ok',e.target.checked);
+});
+applyFilters(); refreshProgress();
+
+
+</script>
+</body>
+</html>
